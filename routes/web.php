@@ -30,6 +30,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         // Kategori
         Route::get('/kategori', App\Livewire\Admin\Kategori\Index::class)->name('kategori.index');
+
+        // Stok
+        Route::get('/stok', App\Livewire\Admin\Stok\Index::class)->name('stok.index');
     });
 });
 

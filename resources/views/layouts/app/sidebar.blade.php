@@ -30,6 +30,10 @@
                     <flux:sidebar.item icon="clipboard-document-list" :href="route('admin.pesanan.index')" :current="request()->routeIs('admin.pesanan.*')" wire:navigate>
                         {{ __('Pesanan') }}
                     </flux:sidebar.item>
+
+                    <flux:sidebar.item icon="cube" :href="route('admin.stok.index')" :current="request()->routeIs('admin.stok.*')" wire:navigate>
+                        {{ __('Manajemen Stok') }}
+                    </flux:sidebar.item>
                 </flux:sidebar.group>
 
                 <flux:spacer />

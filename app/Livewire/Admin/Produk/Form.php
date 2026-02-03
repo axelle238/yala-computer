@@ -73,13 +73,54 @@ class Form extends Component
             'status' => $this->status,
         ];
 
+use App\Actions\Stok\ManajemenStok; // Tambahkan import
+use App\Models\RiwayatStok; // Tambahkan import jika perlu manual
+
+// ... (kode lainnya)
+
         if ($this->produkId) {
             $produk = Produk::find($this->produkId);
+            $stokLama = $produk->stok;
+            
             $produk->update($data);
+            
+            // Cek perubahan stok
+            if ($stokLama != $this->stok) {
+                $selisih = $this->stok - $stokLama;
+                $jenis = $selisih > 0 ? 'masuk' : 'keluar';
+                $jumlah = abs($selisih);
+                
+                RiwayatStok::create([
+                    'produk_id' => $produk->id,
+                    'pengguna_id' => auth()->id(),
+                    'jenis' => $jenis,
+                    'jumlah' => $jumlah,
+                    'stok_awal' => $stokLama,
+                    'stok_akhir' => $this->stok,
+                    'keterangan' => 'Penyesuaian via Edit Produk',
+                    'referensi' => 'Edit',
+                ]);
+            }
+
             $aksi = 'UPDATE_PRODUK';
             $pesan = "Admin memperbarui produk {$this->nama}";
         } else {
-            Produk::create($data);
+            $produk = Produk::create($data);
+            
+            // Catat stok awal
+            if ($this->stok > 0) {
+                RiwayatStok::create([
+                    'produk_id' => $produk->id,
+                    'pengguna_id' => auth()->id(),
+                    'jenis' => 'masuk',
+                    'jumlah' => $this->stok,
+                    'stok_awal' => 0,
+                    'stok_akhir' => $this->stok,
+                    'keterangan' => 'Stok Awal Produk Baru',
+                    'referensi' => 'Baru',
+                ]);
+            }
+
             $aksi = 'TAMBAH_PRODUK';
             $pesan = "Admin menambahkan produk baru {$this->nama}";
         }

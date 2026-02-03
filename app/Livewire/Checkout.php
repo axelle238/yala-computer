@@ -87,8 +87,13 @@ class Checkout extends Component
                     'subtotal' => $item->jumlah * $item->produk->harga_jual,
                 ]);
 
-                // Kurangi Stok
-                $item->produk->decrement('stok', $item->jumlah);
+                // Kurangi Stok via Helper untuk mencatat riwayat
+                \App\Actions\Stok\ManajemenStok::kurang(
+                    $item->produk_id, 
+                    $item->jumlah, 
+                    'Penjualan #' . $nomorInvoice, 
+                    $pesanan->id
+                );
             }
 
             // 3. Hapus Keranjang
