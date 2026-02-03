@@ -37,7 +37,7 @@
 
             <div class="flex items-center gap-4">
                 <!-- Search Icon (Mobile/Desktop) -->
-                <button class="p-2 text-gray-500 hover:bg-gray-100 rounded-full">
+                <button class="p-2 text-gray-500 hover:bg-gray-100 rounded-full transition">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
                       <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                     </svg>
@@ -47,9 +47,28 @@
                 <livewire:keranjang-badge />
 
                 @auth
-                    <a href="{{ route('dashboard') }}" class="text-sm font-semibold text-blue-600 hover:text-blue-700">Dashboard</a>
+                    <div class="flex items-center gap-3 ml-2 pl-4 border-l border-gray-200">
+                        <a href="{{ route('pesanan.saya') }}" class="text-sm font-bold text-gray-700 hover:text-blue-600 transition flex items-center gap-2">
+                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-4">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            </svg>
+                            Pesanan Saya
+                        </a>
+                        @if(auth()->user()->peran === 'admin')
+                            <a href="{{ route('dashboard') }}" class="px-4 py-2 text-xs font-bold text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 transition">Admin Panel</a>
+                        @endif
+                        
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="text-gray-400 hover:text-red-500 transition" title="Keluar">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-5">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
                 @else
-                    <a href="{{ route('login') }}" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition shadow-lg shadow-blue-600/20">
+                    <a href="{{ route('login') }}" class="px-6 py-2.5 text-sm font-bold text-white bg-blue-600 rounded-xl hover:bg-blue-700 transition shadow-lg shadow-blue-200">
                         Masuk
                     </a>
                 @endauth

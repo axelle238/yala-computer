@@ -1,6 +1,6 @@
 {
     "nama_sistem": "Yala Computer System",
-    "waktu_generate": "2026-02-03 17:35:41",
+    "waktu_generate": "2026-02-03 17:38:43",
     "versi_laravel": "12.49.0",
     "database": [
         {
@@ -364,6 +364,12 @@
         },
         {
             "method": "GET|HEAD",
+            "uri": "pesanan-saya",
+            "name": "pesanan.saya",
+            "action": "App\\Livewire\\Pelanggan\\Pesanan\\Index"
+        },
+        {
+            "method": "GET|HEAD",
             "uri": "admin\/produk",
             "name": "admin.produk.index",
             "action": "App\\Livewire\\Admin\\Produk\\Index"
@@ -379,6 +385,24 @@
             "uri": "admin\/produk\/{id}\/edit",
             "name": "admin.produk.edit",
             "action": "App\\Livewire\\Admin\\Produk\\Form"
+        },
+        {
+            "method": "GET|HEAD",
+            "uri": "admin\/pesanan",
+            "name": "admin.pesanan.index",
+            "action": "App\\Livewire\\Admin\\Pesanan\\Index"
+        },
+        {
+            "method": "GET|HEAD",
+            "uri": "admin\/pesanan\/{id}",
+            "name": "admin.pesanan.detail",
+            "action": "App\\Livewire\\Admin\\Pesanan\\Detail"
+        },
+        {
+            "method": "GET|HEAD",
+            "uri": "admin\/kategori",
+            "name": "admin.kategori.index",
+            "action": "App\\Livewire\\Admin\\Kategori\\Index"
         },
         {
             "method": "GET|HEAD",

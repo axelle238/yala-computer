@@ -23,8 +23,11 @@
                         {{ __('Produk') }}
                     </flux:sidebar.item>
 
-                    {{-- Placeholder untuk fitur selanjutnya --}}
-                    <flux:sidebar.item icon="clipboard-document-list" href="#" :current="false">
+                    <flux:sidebar.item icon="tag" :href="route('admin.kategori.index')" :current="request()->routeIs('admin.kategori.*')" wire:navigate>
+                        {{ __('Kategori') }}
+                    </flux:sidebar.item>
+
+                    <flux:sidebar.item icon="clipboard-document-list" :href="route('admin.pesanan.index')" :current="request()->routeIs('admin.pesanan.*')" wire:navigate>
                         {{ __('Pesanan') }}
                     </flux:sidebar.item>
                 </flux:sidebar.group>
