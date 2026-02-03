@@ -15,8 +15,8 @@
 
             <flux:sidebar.nav>
                 <flux:sidebar.group :heading="__('Menu Utama')" class="grid">
-                    <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
-                        {{ __('Dashboard') }}
+                    <flux:sidebar.item icon="home" :href="route('dasbor')" :current="request()->routeIs('dasbor')" wire:navigate>
+                        {{ __('Dasbor') }}
                     </flux:sidebar.item>
                     
                     <flux:sidebar.item icon="shopping-bag" :href="route('admin.produk.index')" :current="request()->routeIs('admin.produk.*')" wire:navigate>
@@ -39,7 +39,7 @@
                 <flux:spacer />
 
                 <flux:sidebar.group :heading="__('Akses Cepat')" class="grid">
-                    <flux:sidebar.item icon="globe-alt" :href="route('home')" wire:navigate>
+                    <flux:sidebar.item icon="globe-alt" :href="route('beranda')" wire:navigate>
                         {{ __('Ke Halaman Depan') }}
                     </flux:sidebar.item>
                 </flux:sidebar.group>

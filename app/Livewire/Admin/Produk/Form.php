@@ -81,6 +81,8 @@ class Form extends Component
             
             $produk->update($data);
             
+            CatatAktivitas::catat('UPDATE_PRODUK', $this->nama, "Admin memperbarui data produk {$this->nama}");
+            
             // Cek perubahan stok
             if ($stokLama != $this->stok) {
                 $selisih = $this->stok - $stokLama;
@@ -100,6 +102,8 @@ class Form extends Component
             }
         } else {
             $produk = Produk::create($data);
+            
+            CatatAktivitas::catat('TAMBAH_PRODUK', $this->nama, "Admin menambahkan produk baru {$this->nama}");
             
             // Catat stok awal
             if ($this->stok > 0) {
