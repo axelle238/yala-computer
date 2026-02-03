@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
-class Checkout extends Component
+class Pemesanan extends Component
 {
     public $nama_penerima;
     public $nomor_telepon;
@@ -123,7 +123,7 @@ class Checkout extends Component
         $subtotal = $items->sum(fn($item) => $item->jumlah * $item->produk->harga_jual);
         $totalBayar = $subtotal + $this->biaya_pengiriman;
 
-        return view('livewire.checkout', [
+        return view('livewire.pemesanan', [
             'items' => $items,
             'subtotal' => $subtotal,
             'totalBayar' => $totalBayar

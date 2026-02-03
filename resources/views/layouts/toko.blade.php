@@ -59,8 +59,8 @@
                     </svg>
                 </button>
 
-                <!-- Cart -->
-                <livewire:keranjang-badge />
+                <!-- Keranjang -->
+                <livewire:lencana-keranjang />
 
                 @auth
                     <div class="flex items-center gap-3 ml-2 pl-4 border-l border-gray-200">
@@ -71,7 +71,7 @@
                             Pesanan Saya
                         </a>
                         @if(auth()->user()->peran === 'admin')
-                            <a href="{{ route('dashboard') }}" class="px-4 py-2 text-xs font-bold text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 transition">Admin Panel</a>
+                            <a href="{{ route('dasbor') }}" class="px-4 py-2 text-xs font-bold text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 transition">Admin Panel</a>
                         @endif
                         
                         <form method="POST" action="{{ route('logout') }}">

@@ -9,22 +9,33 @@ class LogAktivitas extends Model
 {
     protected $table = 'log_aktivitas';
 
-    public $timestamps = false; // Karena hanya ada kolom 'waktu' manual/default timestamp
-
+    /**
+     * Atribut yang dapat diisi secara massal.
+     */
     protected $fillable = [
         'pengguna_id',
+        'tipe',
         'aksi',
         'target',
+        'pesan',
         'pesan_naratif',
         'meta_json',
-        'waktu',
+        'ip_address',
+        'user_agent',
     ];
 
+    /**
+     * Konversi tipe data atribut.
+     */
     protected $casts = [
         'meta_json' => 'array',
-        'waktu' => 'datetime',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
 
+    /**
+     * Relasi ke pengguna yang melakukan aktivitas.
+     */
     public function pengguna(): BelongsTo
     {
         return $this->belongsTo(Pengguna::class, 'pengguna_id');

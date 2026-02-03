@@ -1,24 +1,24 @@
 <?php
 
 use App\Livewire\Beranda;
-use App\Livewire\Dashboard;
+use App\Livewire\Dasbor;
 use App\Livewire\Admin\Produk\Index as AdminProdukIndex;
-use App\Livewire\Checkout;
+use App\Livewire\Pemesanan;
 use App\Livewire\Keranjang\Index as KeranjangIndex;
 use App\Livewire\PesananSukses;
-use App\Livewire\Produk\Detail;
+use App\Livewire\Produk\Rincian;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', Beranda::class)->name('home');
-Route::get('/produk/{slug}', Detail::class)->name('produk.detail');
+Route::get('/', Beranda::class)->name('beranda');
+Route::get('/produk/{slug}', Rincian::class)->name('produk.rincian');
 Route::get('/keranjang', KeranjangIndex::class)->name('keranjang');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/checkout', Checkout::class)->name('checkout');
+    Route::get('/pemesanan', Pemesanan::class)->name('pemesanan');
     Route::get('/pesanan/sukses/{id}', PesananSukses::class)->name('pesanan.sukses');
     Route::get('/pesanan-saya', App\Livewire\Pelanggan\Pesanan\Index::class)->name('pesanan.saya');
     
-    // Admin Routes
+    // Rute Admin
     Route::prefix('admin')->name('admin.')->group(function() {
         Route::get('/produk', AdminProdukIndex::class)->name('produk.index');
         Route::get('/produk/tambah', App\Livewire\Admin\Produk\Form::class)->name('produk.tambah');
@@ -36,8 +36,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 });
 
-Route::get('dashboard', Dashboard::class)
+Route::get('dasbor', Dasbor::class)
     ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+    ->name('dasbor');
 
 require __DIR__.'/settings.php';

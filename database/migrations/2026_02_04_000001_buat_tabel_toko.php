@@ -61,17 +61,6 @@ return new class extends Migration
             $table->decimal('subtotal', 15, 2);
             $table->timestamps();
         });
-
-        // Tabel Log Aktivitas
-        Schema::create('log_aktivitas', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('pengguna_id')->nullable()->constrained('pengguna')->nullOnDelete();
-            $table->string('aksi'); // TAMBAH_PRODUK, UPDATE_STOK, LOGIN
-            $table->string('target')->nullable(); // Nama Produk / ID Pesanan
-            $table->text('pesan_naratif'); // "Admin X mengubah stok Laptop Y"
-            $table->json('meta_json')->nullable(); // Data teknis tambahan
-            $table->timestamp('waktu')->useCurrent();
-        });
     }
 
     /**
@@ -79,7 +68,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('log_aktivitas');
         Schema::dropIfExists('detail_pesanan');
         Schema::dropIfExists('pesanan');
         Schema::dropIfExists('produk');

@@ -8,16 +8,16 @@ use App\Models\Pesanan;
 use App\Models\Produk;
 use Livewire\Component;
 
-class Dashboard extends Component
+class Dasbor extends Component
 {
     public function render()
     {
-        return view('livewire.dashboard', [
+        return view('livewire.dasbor', [
             'totalPengguna' => Pengguna::count(),
             'totalProduk' => Produk::count(),
             'totalPesanan' => Pesanan::count(),
             'pendapatan' => Pesanan::where('status', 'selesai')->sum('total_bayar'),
-            'logTerbaru' => LogAktivitas::with('pengguna')->latest('waktu')->take(10)->get()
+            'logTerbaru' => LogAktivitas::with('pengguna')->latest()->take(10)->get()
         ])->layout('layouts.app'); // Menggunakan layout dashboard bawaan
     }
 }

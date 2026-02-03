@@ -85,10 +85,10 @@
                                 <div class="flex-grow">
                                     <p class="text-sm text-gray-800">
                                         <span class="font-bold">{{ $log->pengguna ? $log->pengguna->nama : 'Sistem' }}</span>
-                                        <span class="text-gray-600">{{ $log->pesan_naratif }}</span>
+                                        <span class="text-gray-600">{{ $log->pesan }}</span>
                                     </p>
                                     <div class="flex items-center gap-2 mt-1">
-                                        <span class="text-xs text-gray-400">{{ $log->waktu->diffForHumans() }}</span>
+                                        <span class="text-xs text-gray-400">{{ $log->created_at->diffForHumans() }}</span>
                                         <span class="px-2 py-0.5 bg-gray-100 text-gray-500 text-[10px] rounded uppercase tracking-wider">{{ $log->aksi }}</span>
                                     </div>
                                 </div>

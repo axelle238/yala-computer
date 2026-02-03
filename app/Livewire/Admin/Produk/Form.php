@@ -3,8 +3,10 @@
 namespace App\Livewire\Admin\Produk;
 
 use App\Actions\Log\CatatAktivitas;
+use App\Actions\Stok\ManajemenStok;
 use App\Models\Kategori;
 use App\Models\Produk;
+use App\Models\RiwayatStok;
 use Illuminate\Support\Str;
 use Livewire\Component;
 
@@ -73,11 +75,6 @@ class Form extends Component
             'status' => $this->status,
         ];
 
-use App\Actions\Stok\ManajemenStok; // Tambahkan import
-use App\Models\RiwayatStok; // Tambahkan import jika perlu manual
-
-// ... (kode lainnya)
-
         if ($this->produkId) {
             $produk = Produk::find($this->produkId);
             $stokLama = $produk->stok;
@@ -101,9 +98,6 @@ use App\Models\RiwayatStok; // Tambahkan import jika perlu manual
                     'referensi' => 'Edit',
                 ]);
             }
-
-            $aksi = 'UPDATE_PRODUK';
-            $pesan = "Admin memperbarui produk {$this->nama}";
         } else {
             $produk = Produk::create($data);
             
@@ -120,12 +114,7 @@ use App\Models\RiwayatStok; // Tambahkan import jika perlu manual
                     'referensi' => 'Baru',
                 ]);
             }
-
-            $aksi = 'TAMBAH_PRODUK';
-            $pesan = "Admin menambahkan produk baru {$this->nama}";
         }
-
-        CatatAktivitas::catat($aksi, $this->nama, $pesan);
 
         session()->flash('message', 'Data produk berhasil disimpan.');
         return redirect()->route('admin.produk.index');
