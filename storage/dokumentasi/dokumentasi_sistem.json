@@ -1,6 +1,6 @@
 {
     "nama_sistem": "Yala Computer System",
-    "waktu_generate": "2026-02-03 17:28:30",
+    "waktu_generate": "2026-02-03 17:35:41",
     "versi_laravel": "12.49.0",
     "database": [
         {
@@ -22,6 +22,17 @@
             "fillable": [
                 "nama",
                 "slug"
+            ]
+        },
+        {
+            "model": "Keranjang",
+            "tabel": "keranjang",
+            "primary_key": "id",
+            "fillable": [
+                "pengguna_id",
+                "session_id",
+                "produk_id",
+                "jumlah"
             ]
         },
         {
@@ -326,6 +337,48 @@
             "uri": "\/",
             "name": "home",
             "action": "App\\Livewire\\Beranda"
+        },
+        {
+            "method": "GET|HEAD",
+            "uri": "produk\/{slug}",
+            "name": "produk.detail",
+            "action": "App\\Livewire\\Produk\\Detail"
+        },
+        {
+            "method": "GET|HEAD",
+            "uri": "keranjang",
+            "name": "keranjang",
+            "action": "App\\Livewire\\Keranjang\\Index"
+        },
+        {
+            "method": "GET|HEAD",
+            "uri": "checkout",
+            "name": "checkout",
+            "action": "App\\Livewire\\Checkout"
+        },
+        {
+            "method": "GET|HEAD",
+            "uri": "pesanan\/sukses\/{id}",
+            "name": "pesanan.sukses",
+            "action": "App\\Livewire\\PesananSukses"
+        },
+        {
+            "method": "GET|HEAD",
+            "uri": "admin\/produk",
+            "name": "admin.produk.index",
+            "action": "App\\Livewire\\Admin\\Produk\\Index"
+        },
+        {
+            "method": "GET|HEAD",
+            "uri": "admin\/produk\/tambah",
+            "name": "admin.produk.tambah",
+            "action": "App\\Livewire\\Admin\\Produk\\Form"
+        },
+        {
+            "method": "GET|HEAD",
+            "uri": "admin\/produk\/{id}\/edit",
+            "name": "admin.produk.edit",
+            "action": "App\\Livewire\\Admin\\Produk\\Form"
         },
         {
             "method": "GET|HEAD",
