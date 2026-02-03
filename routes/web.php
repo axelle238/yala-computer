@@ -1,12 +1,13 @@
 <?php
 
+use App\Livewire\Beranda;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::get('/', Beranda::class)->name('home');
 
-Route::view('dashboard', 'dashboard')
+use App\Livewire\Dashboard;
+
+Route::get('dashboard', Dashboard::class)
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 

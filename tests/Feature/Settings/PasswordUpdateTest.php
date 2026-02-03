@@ -1,11 +1,11 @@
 <?php
 
-use App\Models\User;
+use App\\Models\\Pengguna;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Livewire;
 
 test('password can be updated', function () {
-    $user = User::factory()->create([
+    $user = Pengguna::factory()->create([
         'password' => Hash::make('password'),
     ]);
 
@@ -23,7 +23,7 @@ test('password can be updated', function () {
 });
 
 test('correct password must be provided to update password', function () {
-    $user = User::factory()->create([
+    $user = Pengguna::factory()->create([
         'password' => Hash::make('password'),
     ]);
 

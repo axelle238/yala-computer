@@ -27,5 +27,8 @@ class DatabaseSeeder extends Seeder
             'email' => 'pelanggan@yala.com',
             'peran' => 'pelanggan',
         ]);
+
+        // Seed Data Toko
+        $this->call(TokoSeeder::class);
     }
 }
