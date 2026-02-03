@@ -10,92 +10,140 @@ use Illuminate\Support\Str;
 class GenerateDokumentasi extends Command
 {
     /**
-     * The name and signature of the console command.
+     * Nama dan signature command.
      *
      * @var string
      */
     protected $signature = 'dokumentasi:generate';
 
     /**
-     * The console command description.
+     * Deskripsi command.
      *
      * @var string
      */
-    protected $description = 'Generate dokumentasi sistem otomatis (JSON)';
+    protected $description = 'Menghasilkan dokumentasi hidup sistem YALA COMPUTER secara otomatis';
 
     /**
-     * Execute the console command.
+     * Eksekusi command.
      */
     public function handle()
     {
-        $this->info('Memulai generasi dokumentasi...');
+        $this->info('Memulai pembaruan dokumentasi hidup...');
 
-        $data = [
-            'nama_sistem' => 'Yala Computer System',
-            'waktu_generate' => now()->toDateTimeString(),
-            'versi_laravel' => app()->version(),
-            'database' => $this->getDatabaseStructure(),
-            'routes' => $this->getRoutes(),
-            'modul_aktif' => [
-                'Otentikasi (Fortify)',
-                'Manajemen Produk',
-                'Manajemen Pesanan',
-                'Log Aktivitas',
-                'Frontend Toko',
-                'Dashboard Admin'
-            ]
-        ];
-
-        $path = storage_path('dokumentasi');
-        if (!File::exists($path)) {
-            File::makeDirectory($path, 0755, true);
+        // Baca file lama jika ada untuk mempertahankan metadata statis
+        $path = storage_path('dokumentasi/dokumentasi_sistem.json');
+        $dataLama = [];
+        if (File::exists($path)) {
+            $dataLama = json_decode(File::get($path), true);
         }
 
-        File::put($path . '/dokumentasi_sistem.json', json_encode($data, JSON_PRETTY_PRINT));
+        $dataBaru = [
+            'nama_sistem' => 'YALA COMPUTER - Sistem Toko Komputer',
+            'versi' => $dataLama['versi'] ?? '1.0.0', // Pertahankan versi manual
+            'status' => $dataLama['status'] ?? 'Stabil',
+            'bahasa' => '100% Bahasa Indonesia',
+            'framework' => 'Laravel ' . app()->version(),
+            'waktu_generate' => now()->translatedFormat('l, d F Y H:i:s'),
+            'aturan_utama' => [
+                "Tanpa Modal (No Modals)",
+                "SPA dengan Livewire",
+                "SEO Terstruktur",
+                "Log Aktivitas Naratif"
+            ],
+            'struktur_database' => $this->analisisDatabase(),
+            'rute_sistem' => $this->analisisRute(),
+            'modul_aktif' => $dataLama['modul_aktif'] ?? [],
+        ];
 
-        $this->info('Dokumentasi berhasil dibuat di: ' . $path . '/dokumentasi_sistem.json');
+        // Pastikan folder ada
+        if (!File::exists(dirname($path))) {
+            File::makeDirectory(dirname($path), 0755, true);
+        }
+
+        File::put($path, json_encode($dataBaru, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+
+        $this->info('Dokumentasi berhasil diperbarui di: ' . $path);
     }
 
-    private function getDatabaseStructure()
+    /**
+     * Menganalisis model untuk mendapatkan struktur database.
+     */
+    private function analisisDatabase()
     {
         $modelsPath = app_path('Models');
         $files = File::allFiles($modelsPath);
-        $structures = [];
+        $struktur = [];
 
         foreach ($files as $file) {
             $modelName = $file->getFilenameWithoutExtension();
             $class = "App\\Models\\$modelName";
             
             if (class_exists($class)) {
-                $model = new $class;
-                $structures[] = [
-                    'model' => $modelName,
-                    'tabel' => $model->getTable(),
-                    'primary_key' => $model->getKeyName(),
-                    'fillable' => $model->getFillable(),
-                ];
+                try {
+                    $model = new $class;
+                    $struktur[$modelName] = [
+                        'tabel' => $model->getTable(),
+                        'kolom_dapat_diisi' => $model->getFillable(),
+                        'tipe_kunci_utama' => $model->getKeyType(),
+                        'relasi_perkiraan' => $this->tebakRelasi($class), // Fitur eksperimental
+                    ];
+                } catch (\Exception $e) {
+                    // Abaikan jika model tidak bisa diinstansiasi
+                }
             }
         }
 
-        return $structures;
+        return $struktur;
     }
 
-    private function getRoutes()
+    /**
+     * Menganalisis rute yang terdaftar.
+     */
+    private function analisisRute()
     {
         $routes = Route::getRoutes();
-        $list = [];
+        $daftar = [];
 
         foreach ($routes as $route) {
-            if (!Str::startsWith($route->uri(), '_') && !Str::startsWith($route->uri(), 'sanctum')) {
-                $list[] = [
-                    'method' => implode('|', $route->methods()),
+            // Filter rute bawaan framework yang tidak relevan untuk dokumentasi bisnis
+            if (!Str::startsWith($route->uri(), '_') && 
+                !Str::startsWith($route->uri(), 'sanctum') && 
+                !Str::startsWith($route->uri(), 'api')) {
+                
+                $middleware = $route->gatherMiddleware();
+                $akses = in_array('auth', $middleware) ? 'Terbatas (Login)' : 'Publik';
+                
+                $daftar[] = [
                     'uri' => $route->uri(),
-                    'name' => $route->getName(),
-                    'action' => $route->getActionName(),
+                    'nama_rute' => $route->getName(),
+                    'akses' => $akses,
+                    'method' => implode('|', $route->methods()),
                 ];
             }
         }
 
-        return $list;
+        return $daftar;
+    }
+
+    /**
+     * Mencoba menebak relasi berdasarkan method di model.
+     * Membaca file model sebagai string untuk mencari return type relation.
+     */
+    private function tebakRelasi($class)
+    {
+        $relasi = [];
+        $reflector = new \ReflectionClass($class);
+        
+        foreach ($reflector->getMethods() as $method) {
+            // Abaikan method bawaan Eloquent
+            if ($method->class == $class && $method->isPublic()) {
+                $returnType = $method->getReturnType();
+                if ($returnType && Str::contains($returnType, 'Relations')) {
+                    $relasi[] = $method->getName();
+                }
+            }
+        }
+        
+        return $relasi;
     }
 }

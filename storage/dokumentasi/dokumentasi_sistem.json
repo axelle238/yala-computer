@@ -3,11 +3,512 @@
     "versi": "1.3.0",
     "status": "Pengembangan Tahap 4 (SEO Teknis & Penyempurnaan Frontend)",
     "bahasa": "100% Bahasa Indonesia",
+    "framework": "Laravel 12.49.0",
+    "waktu_generate": "Tuesday, 03 February 2026 23:42:39",
     "aturan_utama": [
         "Tanpa Modal (No Modals)",
         "SPA dengan Livewire",
         "SEO Terstruktur",
         "Log Aktivitas Naratif"
+    ],
+    "struktur_database": {
+        "DetailPesanan": {
+            "tabel": "detail_pesanan",
+            "kolom_dapat_diisi": [
+                "pesanan_id",
+                "produk_id",
+                "jumlah",
+                "harga_satuan",
+                "subtotal"
+            ],
+            "tipe_kunci_utama": "int",
+            "relasi_perkiraan": [
+                "pesanan",
+                "produk"
+            ]
+        },
+        "Kategori": {
+            "tabel": "kategori",
+            "kolom_dapat_diisi": [
+                "nama",
+                "slug"
+            ],
+            "tipe_kunci_utama": "int",
+            "relasi_perkiraan": [
+                "produk"
+            ]
+        },
+        "Keranjang": {
+            "tabel": "keranjang",
+            "kolom_dapat_diisi": [
+                "pengguna_id",
+                "session_id",
+                "produk_id",
+                "jumlah"
+            ],
+            "tipe_kunci_utama": "int",
+            "relasi_perkiraan": [
+                "produk",
+                "pengguna"
+            ]
+        },
+        "LogAktivitas": {
+            "tabel": "log_aktivitas",
+            "kolom_dapat_diisi": [
+                "pengguna_id",
+                "tipe",
+                "aksi",
+                "target",
+                "pesan",
+                "pesan_naratif",
+                "meta_json",
+                "ip_address",
+                "user_agent"
+            ],
+            "tipe_kunci_utama": "int",
+            "relasi_perkiraan": [
+                "pengguna"
+            ]
+        },
+        "Pengguna": {
+            "tabel": "pengguna",
+            "kolom_dapat_diisi": [
+                "nama",
+                "email",
+                "password",
+                "peran",
+                "nomor_telepon",
+                "alamat_lengkap",
+                "foto_profil"
+            ],
+            "tipe_kunci_utama": "int",
+            "relasi_perkiraan": []
+        },
+        "Pesanan": {
+            "tabel": "pesanan",
+            "kolom_dapat_diisi": [
+                "nomor_invoice",
+                "pengguna_id",
+                "total_barang",
+                "biaya_pengiriman",
+                "total_bayar",
+                "status",
+                "catatan",
+                "informasi_pengiriman_json"
+            ],
+            "tipe_kunci_utama": "int",
+            "relasi_perkiraan": [
+                "pengguna",
+                "detailPesanan"
+            ]
+        },
+        "Produk": {
+            "tabel": "produk",
+            "kolom_dapat_diisi": [
+                "kategori_id",
+                "nama",
+                "slug",
+                "deskripsi_pendek",
+                "deskripsi_lengkap",
+                "harga_modal",
+                "harga_jual",
+                "stok",
+                "berat_gram",
+                "spesifikasi_json",
+                "gambar_json",
+                "status"
+            ],
+            "tipe_kunci_utama": "int",
+            "relasi_perkiraan": [
+                "kategori"
+            ]
+        },
+        "RiwayatStok": {
+            "tabel": "riwayat_stok",
+            "kolom_dapat_diisi": [
+                "produk_id",
+                "pengguna_id",
+                "jenis",
+                "jumlah",
+                "stok_awal",
+                "stok_akhir",
+                "keterangan",
+                "referensi"
+            ],
+            "tipe_kunci_utama": "int",
+            "relasi_perkiraan": [
+                "produk",
+                "pengguna"
+            ]
+        }
+    },
+    "rute_sistem": [
+        {
+            "uri": "login",
+            "nama_rute": "login",
+            "akses": "Publik",
+            "method": "GET|HEAD"
+        },
+        {
+            "uri": "login",
+            "nama_rute": "login.store",
+            "akses": "Publik",
+            "method": "POST"
+        },
+        {
+            "uri": "logout",
+            "nama_rute": "logout",
+            "akses": "Publik",
+            "method": "POST"
+        },
+        {
+            "uri": "forgot-password",
+            "nama_rute": "password.request",
+            "akses": "Publik",
+            "method": "GET|HEAD"
+        },
+        {
+            "uri": "reset-password/{token}",
+            "nama_rute": "password.reset",
+            "akses": "Publik",
+            "method": "GET|HEAD"
+        },
+        {
+            "uri": "forgot-password",
+            "nama_rute": "password.email",
+            "akses": "Publik",
+            "method": "POST"
+        },
+        {
+            "uri": "reset-password",
+            "nama_rute": "password.update",
+            "akses": "Publik",
+            "method": "POST"
+        },
+        {
+            "uri": "register",
+            "nama_rute": "register",
+            "akses": "Publik",
+            "method": "GET|HEAD"
+        },
+        {
+            "uri": "register",
+            "nama_rute": "register.store",
+            "akses": "Publik",
+            "method": "POST"
+        },
+        {
+            "uri": "email/verify",
+            "nama_rute": "verification.notice",
+            "akses": "Publik",
+            "method": "GET|HEAD"
+        },
+        {
+            "uri": "email/verify/{id}/{hash}",
+            "nama_rute": "verification.verify",
+            "akses": "Publik",
+            "method": "GET|HEAD"
+        },
+        {
+            "uri": "email/verification-notification",
+            "nama_rute": "verification.send",
+            "akses": "Publik",
+            "method": "POST"
+        },
+        {
+            "uri": "user/confirm-password",
+            "nama_rute": "password.confirm",
+            "akses": "Publik",
+            "method": "GET|HEAD"
+        },
+        {
+            "uri": "user/confirmed-password-status",
+            "nama_rute": "password.confirmation",
+            "akses": "Publik",
+            "method": "GET|HEAD"
+        },
+        {
+            "uri": "user/confirm-password",
+            "nama_rute": "password.confirm.store",
+            "akses": "Publik",
+            "method": "POST"
+        },
+        {
+            "uri": "two-factor-challenge",
+            "nama_rute": "two-factor.login",
+            "akses": "Publik",
+            "method": "GET|HEAD"
+        },
+        {
+            "uri": "two-factor-challenge",
+            "nama_rute": "two-factor.login.store",
+            "akses": "Publik",
+            "method": "POST"
+        },
+        {
+            "uri": "user/two-factor-authentication",
+            "nama_rute": "two-factor.enable",
+            "akses": "Publik",
+            "method": "POST"
+        },
+        {
+            "uri": "user/confirmed-two-factor-authentication",
+            "nama_rute": "two-factor.confirm",
+            "akses": "Publik",
+            "method": "POST"
+        },
+        {
+            "uri": "user/two-factor-authentication",
+            "nama_rute": "two-factor.disable",
+            "akses": "Publik",
+            "method": "DELETE"
+        },
+        {
+            "uri": "user/two-factor-qr-code",
+            "nama_rute": "two-factor.qr-code",
+            "akses": "Publik",
+            "method": "GET|HEAD"
+        },
+        {
+            "uri": "user/two-factor-secret-key",
+            "nama_rute": "two-factor.secret-key",
+            "akses": "Publik",
+            "method": "GET|HEAD"
+        },
+        {
+            "uri": "user/two-factor-recovery-codes",
+            "nama_rute": "two-factor.recovery-codes",
+            "akses": "Publik",
+            "method": "GET|HEAD"
+        },
+        {
+            "uri": "user/two-factor-recovery-codes",
+            "nama_rute": "two-factor.regenerate-recovery-codes",
+            "akses": "Publik",
+            "method": "POST"
+        },
+        {
+            "uri": "flux/flux.js",
+            "nama_rute": null,
+            "akses": "Publik",
+            "method": "GET|HEAD"
+        },
+        {
+            "uri": "flux/flux.min.js",
+            "nama_rute": null,
+            "akses": "Publik",
+            "method": "GET|HEAD"
+        },
+        {
+            "uri": "flux/editor.css",
+            "nama_rute": null,
+            "akses": "Publik",
+            "method": "GET|HEAD"
+        },
+        {
+            "uri": "flux/editor.js",
+            "nama_rute": null,
+            "akses": "Publik",
+            "method": "GET|HEAD"
+        },
+        {
+            "uri": "flux/editor.min.js",
+            "nama_rute": null,
+            "akses": "Publik",
+            "method": "GET|HEAD"
+        },
+        {
+            "uri": "livewire-734fcb8a/update",
+            "nama_rute": "default.livewire.update",
+            "akses": "Publik",
+            "method": "POST"
+        },
+        {
+            "uri": "livewire-734fcb8a/livewire.js",
+            "nama_rute": null,
+            "akses": "Publik",
+            "method": "GET|HEAD"
+        },
+        {
+            "uri": "livewire-734fcb8a/livewire.min.js.map",
+            "nama_rute": null,
+            "akses": "Publik",
+            "method": "GET|HEAD"
+        },
+        {
+            "uri": "livewire-734fcb8a/livewire.csp.min.js.map",
+            "nama_rute": null,
+            "akses": "Publik",
+            "method": "GET|HEAD"
+        },
+        {
+            "uri": "livewire-734fcb8a/upload-file",
+            "nama_rute": "livewire.upload-file",
+            "akses": "Publik",
+            "method": "POST"
+        },
+        {
+            "uri": "livewire-734fcb8a/preview-file/{filename}",
+            "nama_rute": "livewire.preview-file",
+            "akses": "Publik",
+            "method": "GET|HEAD"
+        },
+        {
+            "uri": "livewire-734fcb8a/js/{component}.js",
+            "nama_rute": null,
+            "akses": "Publik",
+            "method": "GET|HEAD"
+        },
+        {
+            "uri": "livewire-734fcb8a/css/{component}.css",
+            "nama_rute": null,
+            "akses": "Publik",
+            "method": "GET|HEAD"
+        },
+        {
+            "uri": "livewire-734fcb8a/css/{component}.global.css",
+            "nama_rute": null,
+            "akses": "Publik",
+            "method": "GET|HEAD"
+        },
+        {
+            "uri": "up",
+            "nama_rute": null,
+            "akses": "Publik",
+            "method": "GET|HEAD"
+        },
+        {
+            "uri": "/",
+            "nama_rute": "beranda",
+            "akses": "Publik",
+            "method": "GET|HEAD"
+        },
+        {
+            "uri": "produk/{slug}",
+            "nama_rute": "produk.rincian",
+            "akses": "Publik",
+            "method": "GET|HEAD"
+        },
+        {
+            "uri": "kategori/{slug}",
+            "nama_rute": "kategori.detail",
+            "akses": "Publik",
+            "method": "GET|HEAD"
+        },
+        {
+            "uri": "keranjang",
+            "nama_rute": "keranjang",
+            "akses": "Publik",
+            "method": "GET|HEAD"
+        },
+        {
+            "uri": "pemesanan",
+            "nama_rute": "pemesanan",
+            "akses": "Terbatas (Login)",
+            "method": "GET|HEAD"
+        },
+        {
+            "uri": "pesanan/sukses/{id}",
+            "nama_rute": "pesanan.sukses",
+            "akses": "Terbatas (Login)",
+            "method": "GET|HEAD"
+        },
+        {
+            "uri": "pesanan-saya",
+            "nama_rute": "pesanan.saya",
+            "akses": "Terbatas (Login)",
+            "method": "GET|HEAD"
+        },
+        {
+            "uri": "pesanan-saya/{id}",
+            "nama_rute": "pesanan.saya.detail",
+            "akses": "Terbatas (Login)",
+            "method": "GET|HEAD"
+        },
+        {
+            "uri": "admin/produk",
+            "nama_rute": "admin.produk.index",
+            "akses": "Terbatas (Login)",
+            "method": "GET|HEAD"
+        },
+        {
+            "uri": "admin/produk/tambah",
+            "nama_rute": "admin.produk.tambah",
+            "akses": "Terbatas (Login)",
+            "method": "GET|HEAD"
+        },
+        {
+            "uri": "admin/produk/{id}/edit",
+            "nama_rute": "admin.produk.edit",
+            "akses": "Terbatas (Login)",
+            "method": "GET|HEAD"
+        },
+        {
+            "uri": "admin/pesanan",
+            "nama_rute": "admin.pesanan.index",
+            "akses": "Terbatas (Login)",
+            "method": "GET|HEAD"
+        },
+        {
+            "uri": "admin/pesanan/{id}",
+            "nama_rute": "admin.pesanan.detail",
+            "akses": "Terbatas (Login)",
+            "method": "GET|HEAD"
+        },
+        {
+            "uri": "admin/kategori",
+            "nama_rute": "admin.kategori.index",
+            "akses": "Terbatas (Login)",
+            "method": "GET|HEAD"
+        },
+        {
+            "uri": "admin/stok",
+            "nama_rute": "admin.stok.index",
+            "akses": "Terbatas (Login)",
+            "method": "GET|HEAD"
+        },
+        {
+            "uri": "dasbor",
+            "nama_rute": "dasbor",
+            "akses": "Terbatas (Login)",
+            "method": "GET|HEAD"
+        },
+        {
+            "uri": "settings",
+            "nama_rute": null,
+            "akses": "Terbatas (Login)",
+            "method": "GET|HEAD|POST|PUT|PATCH|DELETE|OPTIONS"
+        },
+        {
+            "uri": "settings/profile",
+            "nama_rute": "profile.edit",
+            "akses": "Terbatas (Login)",
+            "method": "GET|HEAD"
+        },
+        {
+            "uri": "settings/password",
+            "nama_rute": "user-password.edit",
+            "akses": "Terbatas (Login)",
+            "method": "GET|HEAD"
+        },
+        {
+            "uri": "settings/appearance",
+            "nama_rute": "appearance.edit",
+            "akses": "Terbatas (Login)",
+            "method": "GET|HEAD"
+        },
+        {
+            "uri": "settings/two-factor",
+            "nama_rute": "two-factor.show",
+            "akses": "Terbatas (Login)",
+            "method": "GET|HEAD"
+        },
+        {
+            "uri": "storage/{path}",
+            "nama_rute": "storage.local",
+            "akses": "Publik",
+            "method": "GET|HEAD"
+        }
     ],
     "modul_aktif": [
         "Dasbor Admin",
@@ -21,16 +522,5 @@
         "Manajemen Stok",
         "Log Aktivitas",
         "SEO Otomatis (Sitemap + JSON-LD)"
-    ],
-    "struktur_database": {
-        "pengguna": "Akun sistem (Admin & Pelanggan)",
-        "kategori": "Pengelompokan produk",
-        "produk": "Data barang dagangan",
-        "pesanan": "Header transaksi",
-        "detail_pesanan": "Item transaksi",
-        "log_aktivitas": "Audit trail naratif",
-        "keranjang": "Penyimpanan sementara belanja",
-        "riwayat_stok": "Log pergerakan barang"
-    },
-    "waktu_generate": "2026-02-04 03:30:00"
+    ]
 }
