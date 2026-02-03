@@ -17,6 +17,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/pemesanan', Pemesanan::class)->name('pemesanan');
     Route::get('/pesanan/sukses/{id}', PesananSukses::class)->name('pesanan.sukses');
     Route::get('/pesanan-saya', App\Livewire\Pelanggan\Pesanan\Index::class)->name('pesanan.saya');
+    Route::get('/pesanan-saya/{id}', App\Livewire\Pelanggan\Pesanan\Detail::class)->name('pesanan.saya.detail');
     
     // Rute Admin
     Route::prefix('admin')->name('admin.')->group(function() {

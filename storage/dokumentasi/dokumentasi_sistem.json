@@ -1,7 +1,7 @@
 {
     "nama_sistem": "YALA COMPUTER - Sistem Toko Komputer",
-    "versi": "1.1.0",
-    "status": "Pengembangan Tahap 2 (Manajemen Produk & Kategori)",
+    "versi": "1.2.0",
+    "status": "Pengembangan Tahap 3 (Manajemen Pesanan & Transaksi)",
     "bahasa": "100% Bahasa Indonesia",
     "aturan_utama": [
         "Tanpa Modal (No Modals)",
@@ -13,6 +13,8 @@
         "Dasbor Admin",
         "Manajemen Produk (CRUD + Log)",
         "Manajemen Kategori (Inline Edit)",
+        "Manajemen Pesanan (Admin: Update Status + Auto Restock)",
+        "Riwayat Pesanan (Pelanggan: List + Detail)",
         "Katalog Produk (Frontend)",
         "Keranjang Belanja",
         "Pemesanan",
@@ -29,5 +31,5 @@
         "keranjang": "Penyimpanan sementara belanja",
         "riwayat_stok": "Log pergerakan barang"
     },
-    "waktu_generate": "2026-02-04 02:30:00"
+    "waktu_generate": "2026-02-04 03:00:00"
 }

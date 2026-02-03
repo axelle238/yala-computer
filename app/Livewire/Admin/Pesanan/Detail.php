@@ -27,9 +27,21 @@ class Detail extends Component
      */
     public function updateStatus($status)
     {
-        $pesanan = Pesanan::findOrFail($this->pesananId);
+        $pesanan = Pesanan::with('detailPesanan')->findOrFail($this->pesananId);
         $statusLama = $pesanan->status;
         
+        // Cek jika dibatalkan, kembalikan stok
+        if ($status === 'dibatalkan' && $statusLama !== 'dibatalkan') {
+            foreach ($pesanan->detailPesanan as $detail) {
+                \App\Actions\Stok\ManajemenStok::tambah(
+                    $detail->produk_id,
+                    $detail->jumlah,
+                    "Pengembalian stok dari pembatalan pesanan #{$pesanan->nomor_invoice}",
+                    $pesanan->id
+                );
+            }
+        }
+
         $pesanan->update(['status' => $status]);
         $this->statusBaru = $status;
 

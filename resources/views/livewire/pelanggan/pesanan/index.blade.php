@@ -9,7 +9,7 @@
 
         <div class="space-y-6">
             @forelse($riwayatPesanan as $pesanan)
-                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition group">
+                <a href="{{ route('pesanan.saya.detail', $pesanan->id) }}" class="block bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition group">
                     <!-- Header Kartu -->
                     <div class="px-6 py-4 border-b border-gray-50 flex flex-wrap justify-between items-center gap-4 bg-gray-50/30">
                         <div class="flex items-center gap-4">
@@ -66,7 +66,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </a>
             @empty
                 <div class="text-center py-24 bg-white rounded-3xl border border-dashed border-gray-200">
                     <div class="w-20 h-20 bg-blue-50 text-blue-200 rounded-full flex items-center justify-center mx-auto mb-4">
