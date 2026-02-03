@@ -30,6 +30,8 @@
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @fluxStyles
+    
+    <x-seo.json-ld :json="$schemaOrg ?? null" />
 </head>
 <body class="font-sans antialiased bg-gray-50 text-gray-900 min-h-screen flex flex-col">
     @fluxScripts

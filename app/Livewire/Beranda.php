@@ -24,6 +24,6 @@ class Beranda extends Component
 
         return view('livewire.beranda', [
             'produkTerbaru' => $produkTerbaru
-        ])->layout('layouts.toko');
+        ])->layout('layouts.toko', $this->ambilDataSEO());
     }
 }

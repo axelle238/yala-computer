@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', Beranda::class)->name('beranda');
 Route::get('/produk/{slug}', Rincian::class)->name('produk.rincian');
+Route::get('/kategori/{slug}', App\Livewire\Kategori\Detail::class)->name('kategori.detail');
 Route::get('/keranjang', KeranjangIndex::class)->name('keranjang');
 
 Route::middleware(['auth', 'verified'])->group(function () {

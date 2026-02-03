@@ -21,11 +21,10 @@ class GenerateSitemap extends Command
         $this->info('Memulai pembuatan sitemap...');
 
         $urls = [];
-        $baseUrl = config('app.url');
 
         // Halaman Utama
         $urls[] = [
-            'loc' => $baseUrl,
+            'loc' => route('beranda'),
             'lastmod' => now()->toAtomString(),
             'changefreq' => 'daily',
             'priority' => '1.0'
@@ -35,7 +34,7 @@ class GenerateSitemap extends Command
         $produk = Produk::where('status', 'aktif')->get();
         foreach ($produk as $p) {
             $urls[] = [
-                'loc' => $baseUrl . '/produk/' . $p->slug,
+                'loc' => route('produk.rincian', $p->slug),
                 'lastmod' => $p->updated_at->toAtomString(),
                 'changefreq' => 'weekly',
                 'priority' => '0.8'
@@ -46,7 +45,7 @@ class GenerateSitemap extends Command
         $kategori = Kategori::all();
         foreach ($kategori as $k) {
             $urls[] = [
-                'loc' => $baseUrl . '/kategori/' . $k->slug,
+                'loc' => route('kategori.detail', $k->slug),
                 'lastmod' => $k->updated_at->toAtomString(),
                 'changefreq' => 'monthly',
                 'priority' => '0.5'

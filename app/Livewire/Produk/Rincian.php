@@ -10,6 +10,8 @@ use Livewire\Component;
 
 class Rincian extends Component
 {
+    use \App\Concerns\PunyaMetaSEO;
+
     public $produk;
 
     public function mount($slug)
@@ -39,6 +41,29 @@ class Rincian extends Component
 
     public function render()
     {
-        return view('livewire.produk.rincian')->layout('layouts.toko');
+        $schema = [
+            '@context' => 'https://schema.org/',
+            '@type' => 'Product',
+            'name' => $this->produk->nama,
+            'description' => $this->produk->deskripsi_pendek ?? substr($this->produk->deskripsi_lengkap, 0, 160),
+            'image' => asset('favicon.svg'), // Placeholder, nanti ganti real image
+            'sku' => $this->produk->id,
+            'offers' => [
+                '@type' => 'Offer',
+                'url' => route('produk.rincian', $this->produk->slug),
+                'priceCurrency' => 'IDR',
+                'price' => $this->produk->harga_jual,
+                'availability' => $this->produk->stok > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+            ],
+        ];
+
+        $this->aturSEO(
+            $this->produk->nama,
+            $this->produk->deskripsi_pendek ?? substr($this->produk->deskripsi_lengkap, 0, 160),
+            null,
+            $schema
+        );
+
+        return view('livewire.produk.rincian')->layout('layouts.toko', $this->ambilDataSEO());
     }
 }
