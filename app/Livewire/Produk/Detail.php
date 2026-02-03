@@ -10,6 +10,8 @@ use Livewire\Component;
 
 class Detail extends Component
 {
+    use \App\Concerns\PunyaMetaSEO;
+
     public $slug;
     public $jumlah = 1;
 
@@ -65,7 +67,12 @@ class Detail extends Component
 
     public function render()
     {
-        $produk = Produk::where('slug', $this->slug)->firstOrFail();
+        $produk = Produk::where('slug', $this->slug)->with('kategori')->firstOrFail();
+
+        $this->aturSEO(
+            $produk->nama . ' - ' . $produk->kategori->nama,
+            $produk->deskripsi_pendek
+        );
         
         // Produk Terkait (Simple logic: kategori sama, kecuali produk ini)
         $produkTerkait = Produk::where('kategori_id', $produk->kategori_id)

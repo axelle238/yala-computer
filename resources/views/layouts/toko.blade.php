@@ -5,7 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ $title ?? 'Yala Computer - Toko Komputer Terlengkap' }}</title>
+    <title>{{ $judulMeta ?? 'Yala Computer - Toko Komputer Terlengkap' }}</title>
+    <meta name="description" content="{{ $deskripsiMeta ?? 'Pusat belanja komputer dan kebutuhan IT terlengkap dengan harga kompetitif dan garansi resmi.' }}">
+    <meta name="keywords" content="toko komputer, laptop gaming, aksesoris komputer, yala computer, sparepart pc">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:title" content="{{ $judulMeta ?? 'Yala Computer' }}">
+    <meta property="og:description" content="{{ $deskripsiMeta ?? 'Pusat belanja komputer dan kebutuhan IT terlengkap.' }}">
+    <meta property="og:image" content="{{ $gambarMeta ?? asset('favicon.svg') }}">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{{ url()->current() }}">
+    <meta property="twitter:title" content="{{ $judulMeta ?? 'Yala Computer' }}">
+    <meta property="twitter:description" content="{{ $deskripsiMeta ?? 'Pusat belanja komputer dan kebutuhan IT terlengkap.' }}">
+    <meta property="twitter:image" content="{{ $gambarMeta ?? asset('favicon.svg') }}">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">

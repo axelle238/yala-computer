@@ -7,8 +7,15 @@ use Livewire\Component;
 
 class Beranda extends Component
 {
+    use \App\Concerns\PunyaMetaSEO;
+
     public function render()
     {
+        $this->aturSEO(
+            'Toko Komputer Terlengkap & Terpercaya',
+            'Cari Laptop, Komponen PC, dan Aksesoris berkualitas hanya di Yala Computer. Garansi resmi dan harga terbaik.'
+        );
+
         $produkTerbaru = Produk::with('kategori')
             ->where('status', 'aktif')
             ->latest()
