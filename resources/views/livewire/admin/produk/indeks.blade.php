@@ -139,6 +139,30 @@
 
                             <div class="grid grid-cols-2 gap-6">
                                 <div>
+                                    <label class="block text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] mb-3">Primary Signal (Image)</label>
+                                    <div class="relative group h-24 bg-white/2 border border-dashed border-white/10 rounded-2xl flex items-center justify-center overflow-hidden">
+                                        @if ($gambar_utama)
+                                            <img src="{{ $gambar_utama->temporaryUrl() }}" class="w-full h-full object-cover">
+                                        @else
+                                            <i class="fas fa-cloud-arrow-up text-gray-600 text-xl group-hover:text-blue-500 transition-colors"></i>
+                                        @endif
+                                        <input type="file" wire:model="gambar_utama" class="absolute inset-0 opacity-0 cursor-pointer">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] mb-3">Satellite Gallery</label>
+                                    <div class="relative group h-24 bg-white/2 border border-dashed border-white/10 rounded-2xl flex items-center justify-center overflow-hidden">
+                                        <div class="flex flex-col items-center gap-1">
+                                            <i class="fas fa-images text-gray-600 text-xl group-hover:text-purple-500 transition-colors"></i>
+                                            <span class="text-[8px] text-gray-500 font-black uppercase">{{ count($galeri_baru) }} Nodes</span>
+                                        </div>
+                                        <input type="file" wire:model="galeri_baru" multiple class="absolute inset-0 opacity-0 cursor-pointer">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-6">
+                                <div>
                                     <label class="block text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] mb-3">Classification</label>
                                     <select wire:model="kategori_id" class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-sm text-gray-400 focus:ring-2 focus:ring-blue-500/50 outline-none">
                                         <option value="">Select Sector</option>

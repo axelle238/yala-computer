@@ -60,10 +60,7 @@
                             <span class="text-[10px] font-black text-green-500 tracking-widest">SYSTEM ONLINE</span>
                             <span class="text-[9px] text-gray-500 font-mono">{{ now()->format('H:i:s') }} UTC</span>
                         </div>
-                        <button class="w-12 h-12 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/5 rounded-2xl relative transition-all border border-white/5">
-                            <i class="far fa-bell text-lg"></i>
-                            <span class="absolute top-3 right-3 w-2 h-2 bg-blue-500 rounded-full shadow-[0_0_10px_#3b82f6]"></span>
-                        </button>
+                        <livewire:admin.komponen.notification-hub />
                     </div>
                 </div>
             </header>

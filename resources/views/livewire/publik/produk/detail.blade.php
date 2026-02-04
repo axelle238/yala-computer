@@ -18,9 +18,9 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
             <!-- Galeri Gambar -->
             <div class="space-y-4">
-                <div class="bg-gray-100 rounded-2xl overflow-hidden aspect-square border border-gray-100 relative group">
+                <div class="bg-gray-100 rounded-3xl overflow-hidden aspect-square border border-gray-100 relative group shadow-inner">
                     @if($produk->gambar_utama)
-                        <img src="{{ asset('storage/'.$produk->gambar_utama) }}" alt="{{ $produk->nama }}" class="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-500">
+                        <img src="{{ asset('storage/'.$produk->gambar_utama) }}" alt="{{ $produk->nama }}" class="w-full h-full object-contain p-8 group-hover:scale-105 transition-transform duration-700">
                     @else
                         <div class="w-full h-full flex items-center justify-center text-gray-300">
                             <i class="fas fa-image text-6xl"></i>
@@ -28,11 +28,21 @@
                     @endif
                     
                     @if($produk->apakah_unggulan)
-                        <div class="absolute top-4 left-4">
-                            <span class="bg-orange-500 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm">PRODUK UNGGULAN</span>
+                        <div class="absolute top-6 left-6">
+                            <span class="bg-blue-600 text-white text-[10px] font-black px-4 py-2 rounded-xl shadow-lg shadow-blue-200 uppercase tracking-widest">Enterprise Edition</span>
                         </div>
                     @endif
                 </div>
+
+                @if($produk->galeri_gambar && count($produk->galeri_gambar) > 0)
+                    <div class="grid grid-cols-4 gap-4">
+                        @foreach($produk->galeri_gambar as $gambar)
+                            <div class="aspect-square bg-gray-50 rounded-2xl border border-gray-100 overflow-hidden cursor-pointer hover:border-blue-500 transition-all shadow-sm">
+                                <img src="{{ asset('storage/'.$gambar) }}" class="w-full h-full object-cover">
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
             </div>
 
             <!-- Informasi Produk -->
