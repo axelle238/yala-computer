@@ -109,6 +109,7 @@
             <div class="overflow-hidden transition-all duration-500 max-h-0 {{ $menuTerbuka === 'konten' ? 'max-h-64 mb-2' : '' }}">
                 <div class="pl-14 space-y-1 pr-4">
                     <a href="{{ route('admin.artikel') }}" wire:navigate class="block py-2.5 text-xs font-bold transition-colors {{ request()->routeIs('admin.artikel*') ? 'text-blue-600' : 'text-slate-500 hover:text-blue-600' }}">Blog Engine</a>
+                    <a href="{{ route('admin.banner') }}" wire:navigate class="block py-2.5 text-xs font-bold transition-colors {{ request()->routeIs('admin.banner*') ? 'text-blue-600' : 'text-slate-500 hover:text-blue-600' }}">Banner Promosi</a>
                     <a href="{{ route('admin.pengaturan') }}" wire:navigate class="block py-2.5 text-xs font-bold transition-colors {{ request()->routeIs('admin.pengaturan*') ? 'text-blue-600' : 'text-slate-500 hover:text-blue-600' }}">Core Settings</a>
                 </div>
             </div>

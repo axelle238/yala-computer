@@ -1,60 +1,92 @@
 <div>
-    <!-- Hero Section -->
+    <!-- Hero Section (Dynamic Banner) -->
     <section class="relative bg-[#020617] overflow-hidden min-h-[600px] flex items-center">
         <!-- Ambient Background -->
-        <div class="absolute inset-0">
+        <div class="absolute inset-0 pointer-events-none">
             <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-blue-600/20 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 animate-pulse"></div>
             <div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/2"></div>
         </div>
 
         <div class="container mx-auto px-4 relative z-10 py-20">
-            <div class="flex flex-col md:flex-row items-center gap-16">
-                <div class="flex-1 text-center md:text-left space-y-8">
-                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold uppercase tracking-widest animate-fade-in-up">
-                        <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
-                        New Generation Hardware
-                    </div>
-                    
-                    <h1 class="text-5xl md:text-7xl font-['Outfit'] font-black text-white leading-tight tracking-tight">
-                        Power Your <br>
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">Digital Dreams</span>
-                    </h1>
-                    
-                    <p class="text-lg text-slate-400 md:max-w-xl leading-relaxed">
-                        Temukan perangkat komputasi performa tinggi untuk gaming, kreasi konten, dan produktivitas profesional Anda di sini.
-                    </p>
-                    
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start pt-4">
-                        <a href="{{ url('/katalog') }}" wire:navigate class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 px-10 rounded-2xl shadow-[0_10px_30px_-10px_rgba(37,99,235,0.5)] transition-all transform hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-2">
-                            <span>JELAJAHI KATALOG</span>
-                            <i class="fas fa-arrow-right"></i>
-                        </a>
-                        <a href="#" class="bg-white/5 hover:bg-white/10 text-white font-bold py-4 px-10 rounded-2xl border border-white/10 transition-all flex items-center justify-center gap-2">
-                            <i class="fas fa-wrench"></i>
-                            <span>RAKIT PC</span>
-                        </a>
-                    </div>
-                </div>
+            <!-- Carousel Container -->
+            <div class="relative w-full" x-data="{ activeSlide: 0, slides: {{ $daftar_banner->count() }}, timer: null }" x-init="timer = setInterval(() => { activeSlide = activeSlide === slides - 1 ? 0 : activeSlide + 1 }, 5000)">
                 
-                <div class="flex-1 relative hidden md:block">
-                    <div class="relative w-full aspect-square max-w-lg mx-auto">
-                        <div class="absolute inset-0 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full blur-[100px] opacity-30 animate-pulse"></div>
-                        <img src="https://placehold.co/800x800/1e293b/ffffff?text=RTX+4090+Setup" alt="Gaming Setup" class="relative z-10 w-full h-full object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-500">
-                        
-                        <!-- Floating Badge -->
-                        <div class="absolute bottom-10 -left-10 bg-white/10 backdrop-blur-xl border border-white/20 p-4 rounded-2xl shadow-xl animate-bounce">
-                            <div class="flex items-center gap-3">
-                                <div class="w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center text-white">
-                                    <i class="fas fa-shield-halved text-xl"></i>
-                                </div>
-                                <div>
-                                    <p class="text-[10px] text-slate-300 font-bold uppercase tracking-widest">Garansi Resmi</p>
-                                    <p class="text-white font-bold">100% Original</p>
+                <!-- Slides -->
+                <div class="relative overflow-hidden min-h-[500px] rounded-[3rem] shadow-2xl">
+                    @forelse($daftar_banner as $index => $banner)
+                        <div x-show="activeSlide === {{ $index }}" 
+                             x-transition:enter="transition ease-out duration-700"
+                             x-transition:enter-start="opacity-0 transform scale-95"
+                             x-transition:enter-end="opacity-100 transform scale-100"
+                             x-transition:leave="transition ease-in duration-300"
+                             x-transition:leave-start="opacity-100 transform scale-100"
+                             x-transition:leave-end="opacity-0 transform scale-105"
+                             class="absolute inset-0 w-full h-full"
+                        >
+                            <img src="{{ asset('storage/'.$banner->gambar) }}" alt="{{ $banner->judul }}" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent"></div>
+                            
+                            <div class="absolute inset-0 flex items-center px-12 md:px-20">
+                                <div class="max-w-2xl space-y-6">
+                                    <span class="inline-block px-4 py-2 rounded-full bg-blue-600/20 border border-blue-500/30 text-blue-400 text-xs font-bold uppercase tracking-widest backdrop-blur-sm">
+                                        Featured Promotion
+                                    </span>
+                                    <h2 class="text-4xl md:text-6xl font-['Outfit'] font-black text-white leading-tight tracking-tight drop-shadow-lg">
+                                        {{ $banner->judul }}
+                                    </h2>
+                                    @if($banner->deskripsi)
+                                        <p class="text-lg text-slate-300 leading-relaxed drop-shadow-md">
+                                            {{ $banner->deskripsi }}
+                                        </p>
+                                    @endif
+                                    @if($banner->tautan_tombol)
+                                        <a href="{{ $banner->tautan_tombol }}" wire:navigate class="inline-flex items-center gap-3 bg-white text-slate-900 font-bold py-4 px-8 rounded-2xl hover:bg-blue-500 hover:text-white transition-all transform hover:-translate-y-1 shadow-xl mt-4">
+                                            <span>{{ $banner->teks_tombol }}</span>
+                                            <i class="fas fa-arrow-right"></i>
+                                        </a>
+                                    @endif
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @empty
+                        <!-- Default Static Slide if No Banner -->
+                        <div class="absolute inset-0 w-full h-full flex items-center px-12 md:px-20 bg-[#0B1120]">
+                            <div class="max-w-2xl space-y-6">
+                                <h2 class="text-5xl md:text-7xl font-['Outfit'] font-black text-white leading-tight tracking-tight">
+                                    Power Your <br>
+                                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">Digital Dreams</span>
+                                </h2>
+                                <p class="text-lg text-slate-400 leading-relaxed">
+                                    Temukan perangkat komputasi performa tinggi untuk gaming dan produktivitas Anda.
+                                </p>
+                                <a href="{{ url('/katalog') }}" wire:navigate class="inline-flex items-center gap-3 bg-blue-600 text-white font-bold py-4 px-8 rounded-2xl hover:bg-blue-500 transition-all shadow-xl">
+                                    <span>Jelajahi Katalog</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    @endforelse
                 </div>
+
+                <!-- Controls -->
+                @if($daftar_banner->count() > 1)
+                    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-20">
+                        @foreach($daftar_banner as $index => $banner)
+                            <button @click="activeSlide = {{ $index }}; clearInterval(timer); timer = setInterval(() => { activeSlide = activeSlide === slides - 1 ? 0 : activeSlide + 1 }, 5000)" 
+                                    class="w-3 h-3 rounded-full transition-all duration-300"
+                                    :class="activeSlide === {{ $index }} ? 'bg-blue-500 w-8' : 'bg-white/30 hover:bg-white/50'">
+                            </button>
+                        @endforeach
+                    </div>
+                    
+                    <button @click="activeSlide = activeSlide === 0 ? slides - 1 : activeSlide - 1; clearInterval(timer); timer = setInterval(() => { activeSlide = activeSlide === slides - 1 ? 0 : activeSlide + 1 }, 5000)" class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md flex items-center justify-center text-white transition-all hidden md:flex">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    
+                    <button @click="activeSlide = activeSlide === slides - 1 ? 0 : activeSlide + 1; clearInterval(timer); timer = setInterval(() => { activeSlide = activeSlide === slides - 1 ? 0 : activeSlide + 1 }, 5000)" class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md flex items-center justify-center text-white transition-all hidden md:flex">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                @endif
             </div>
         </div>
     </section>
