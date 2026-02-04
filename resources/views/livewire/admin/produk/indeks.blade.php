@@ -1,172 +1,193 @@
-<div>
-    <div class="flex flex-col lg:flex-row gap-8">
-        
-        <!-- Daftar Produk -->
-        <div class="flex-1">
-            <!-- Header Kontrol -->
-            <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm mb-6 flex flex-col md:flex-row items-center justify-between gap-4">
-                <div class="flex items-center gap-4 w-full md:w-auto">
-                    <div class="relative flex-1 md:w-64">
-                        <input wire:model.live="cari" type="text" placeholder="Cari nama produk..." class="w-full bg-gray-50 border-none rounded-xl py-3 px-5 pl-12 text-sm focus:ring-2 focus:ring-blue-500">
-                        <i class="fas fa-search absolute left-4 top-3.5 text-gray-300"></i>
-                    </div>
-                    <select wire:model.live="filter_kategori" class="bg-gray-50 border-none rounded-xl py-3 px-5 text-sm focus:ring-2 focus:ring-blue-500 min-w-[150px]">
-                        <option value="">Semua Kategori</option>
-                        @foreach($daftar_kategori as $kat)
-                            <option value="{{ $kat->id }}">{{ $kat->nama }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                
-                <button wire:click="tampilkanFormTambah" class="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg shadow-blue-200 transition-all flex items-center justify-center gap-2">
-                    <i class="fas fa-plus"></i>
-                    <span>TAMBAH PRODUK</span>
-                </button>
+<div wire:poll.10s class="space-y-8">
+    
+    <!-- Top Action Bar -->
+    <div class="flex flex-col lg:flex-row gap-6 items-center justify-between bg-[#0B1120]/50 backdrop-blur-xl p-6 rounded-[2rem] border border-white/5 shadow-2xl">
+        <div class="flex items-center gap-6 w-full lg:w-auto">
+            <div class="w-14 h-14 bg-blue-600/10 rounded-2xl flex items-center justify-center text-blue-500 shadow-inner">
+                <i class="fas fa-boxes-stacked text-2xl"></i>
             </div>
+            <div>
+                <h2 class="text-xl font-black text-white tracking-tight">MANAJEMEN INVENTORI</h2>
+                <p class="text-[10px] text-blue-400 font-bold uppercase tracking-[0.2em]">Logistik & Kendali Stok Real-time</p>
+            </div>
+        </div>
 
-            <!-- Tabel Data -->
-            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+        <div class="flex flex-wrap items-center gap-4 w-full lg:w-auto">
+            <div class="relative flex-1 lg:w-80">
+                <input wire:model.live.debounce.300ms="cari" type="text" placeholder="Scanning database produk..." class="w-full bg-white/5 border border-white/10 rounded-2xl py-3 px-5 pl-12 text-sm text-white focus:ring-2 focus:ring-blue-500/50 outline-none transition-all">
+                <i class="fas fa-barcode absolute left-4 top-3.5 text-gray-500"></i>
+            </div>
+            <select wire:model.live="filter_kategori" class="bg-white/5 border border-white/10 rounded-2xl py-3 px-5 text-sm text-gray-400 focus:ring-2 focus:ring-blue-500/50 outline-none cursor-pointer">
+                <option value="">Filter Kategori</option>
+                @foreach($daftar_kategori as $kat)
+                    <option value="{{ $kat->id }}">{{ $kat->nama }}</option>
+                @endforeach
+            </select>
+            <button wire:click="tampilkanFormTambah" class="bg-blue-600 hover:bg-blue-700 text-white font-black py-3 px-8 rounded-2xl shadow-[0_10px_20px_-5px_rgba(37,99,235,0.4)] transition-all transform hover:-translate-y-1 active:scale-95 flex items-center gap-3">
+                <i class="fas fa-plus-circle"></i>
+                <span class="text-xs uppercase tracking-widest">Registrasi Produk</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="flex flex-col xl:flex-row gap-10">
+        
+        <!-- Main Data Terminal -->
+        <div class="flex-1 space-y-6">
+            <div class="bg-[#0B1120]/50 backdrop-blur-xl rounded-[3rem] border border-white/5 overflow-hidden shadow-2xl">
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse">
                         <thead>
-                            <tr class="bg-gray-50/50">
-                                <th class="px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-widest">Produk</th>
-                                <th class="px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-widest">Kategori</th>
-                                <th class="px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-widest">Harga</th>
-                                <th class="px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-widest">Stok</th>
-                                <th class="px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-widest text-center">Aksi</th>
+                            <tr class="bg-white/2 border-b border-white/5">
+                                <th class="px-8 py-6 text-[10px] font-black text-gray-500 uppercase tracking-widest">Resource Name</th>
+                                <th class="px-8 py-6 text-[10px] font-black text-gray-500 uppercase tracking-widest text-center">Core Class</th>
+                                <th class="px-8 py-6 text-[10px] font-black text-gray-500 uppercase tracking-widest">Valuation</th>
+                                <th class="px-8 py-6 text-[10px] font-black text-gray-500 uppercase tracking-widest">Inventory Status</th>
+                                <th class="px-8 py-6 text-[10px] font-black text-gray-500 uppercase tracking-widest text-center">Operations</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-gray-50">
+                        <tbody class="divide-y divide-white/2">
                             @forelse($daftar_produk as $produk)
-                                <tr class="hover:bg-gray-50/50 transition-colors">
-                                    <td class="px-6 py-4">
-                                        <div class="flex items-center gap-3">
-                                            <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center text-gray-300 overflow-hidden">
+                                <tr class="hover:bg-blue-600/5 transition-all group">
+                                    <td class="px-8 py-6">
+                                        <div class="flex items-center gap-5">
+                                            <div class="w-14 h-14 bg-white/5 rounded-2xl border border-white/10 flex items-center justify-center text-gray-600 overflow-hidden relative">
                                                 @if($produk->gambar_utama)
-                                                    <img src="{{ asset('storage/'.$produk->gambar_utama) }}" class="w-full h-full object-cover">
+                                                    <img src="{{ asset('storage/'.$produk->gambar_utama) }}" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
                                                 @else
-                                                    <i class="fas fa-image text-xl"></i>
+                                                    <i class="fas fa-microchip text-xl"></i>
                                                 @endif
+                                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                                             </div>
                                             <div>
-                                                <p class="text-sm font-bold text-gray-900">{{ $produk->nama }}</p>
-                                                <p class="text-[10px] text-gray-400 font-medium">SLUG: {{ $produk->slug }}</p>
+                                                <p class="text-sm font-black text-white tracking-wide group-hover:text-blue-400 transition-colors">{{ $produk->nama }}</p>
+                                                <p class="text-[9px] font-mono text-gray-500 mt-1 uppercase tracking-tighter">UUID: {{ $produk->slug }}</p>
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="px-6 py-4">
-                                        <span class="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-[10px] font-bold uppercase">
+                                    <td class="px-8 py-6 text-center">
+                                        <span class="px-4 py-1.5 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[9px] font-black uppercase tracking-widest">
                                             {{ $produk->kategori->nama }}
                                         </span>
                                     </td>
-                                    <td class="px-6 py-4">
-                                        <p class="text-sm font-bold text-gray-900">Rp {{ number_format($produk->harga, 0, ',', '.') }}</p>
+                                    <td class="px-8 py-6">
+                                        <p class="text-sm font-black text-white">Rp {{ number_format($produk->harga, 0, ',', '.') }}</p>
+                                        <p class="text-[9px] text-gray-600 font-bold mt-1 uppercase">Price Point</p>
                                     </td>
-                                    <td class="px-6 py-4">
-                                        <div class="flex flex-col">
-                                            <span class="text-sm font-bold {{ $produk->jumlah_stok <= 5 ? 'text-red-500' : 'text-gray-900' }}">
-                                                {{ $produk->jumlah_stok }} Unit
-                                            </span>
-                                            @if($produk->jumlah_stok <= 5)
-                                                <span class="text-[9px] text-red-400 font-bold uppercase tracking-tighter">Hampir Habis!</span>
-                                            @endif
+                                    <td class="px-8 py-6">
+                                        <div class="flex flex-col gap-2">
+                                            <div class="flex justify-between items-center w-32">
+                                                <span class="text-[10px] font-black {{ $produk->jumlah_stok <= 5 ? 'text-red-500' : 'text-emerald-500' }}">{{ $produk->jumlah_stok }} UNITS</span>
+                                                <span class="text-[9px] text-gray-600 font-mono">{{ round(($produk->jumlah_stok / 100) * 100) }}%</span>
+                                            </div>
+                                            <div class="w-32 h-1.5 bg-white/5 rounded-full overflow-hidden">
+                                                <div class="h-full {{ $produk->jumlah_stok <= 5 ? 'bg-red-500' : 'bg-emerald-500' }} shadow-[0_0_10px]" style="width: {{ min($produk->jumlah_stok, 100) }}%"></div>
+                                            </div>
                                         </div>
                                     </td>
-                                    <td class="px-6 py-4 text-center">
-                                        <div class="flex items-center justify-center gap-2">
-                                            <button title="Edit" class="w-8 h-8 rounded-lg bg-orange-50 text-orange-600 hover:bg-orange-100 transition-colors">
-                                                <i class="fas fa-edit text-xs"></i>
+                                    <td class="px-8 py-6">
+                                        <div class="flex items-center justify-center gap-3">
+                                            <button wire:click="edit({{ $produk->id }})" class="w-10 h-10 rounded-xl bg-orange-500/10 text-orange-500 border border-orange-500/20 hover:bg-orange-500 hover:text-white transition-all">
+                                                <i class="fas fa-bolt-lightning text-xs"></i>
                                             </button>
-                                            <button title="Hapus" class="w-8 h-8 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors">
-                                                <i class="fas fa-trash text-xs"></i>
+                                            <button wire:click="hapus({{ $produk->id }})" wire:confirm="Initiate resource deletion protocol?" class="w-10 h-10 rounded-xl bg-red-500/10 text-red-500 border border-red-500/20 hover:bg-red-500 hover:text-white transition-all">
+                                                <i class="fas fa-power-off text-xs"></i>
                                             </button>
                                         </div>
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="5" class="px-6 py-12 text-center text-gray-400 italic text-sm">
-                                        Tidak ada produk ditemukan.
+                                    <td colspan="5" class="px-8 py-32 text-center">
+                                        <i class="fas fa-satellite-dish text-white/5 text-6xl mb-6"></i>
+                                        <p class="text-gray-600 font-mono italic">No data packets detected in inventory stream.</p>
                                     </td>
                                 </tr>
                             @endforelse
                         </tbody>
                     </table>
                 </div>
-                <div class="p-6 border-t border-gray-50">
+                <div class="p-8 border-t border-white/5 bg-white/2">
                     {{ $daftar_produk->links() }}
                 </div>
             </div>
         </div>
 
-        <!-- Panel Form (Tambah/Edit) -->
+        <!-- System Control Panel (Sticky) -->
         @if($apakah_menambah || $apakah_mengedit)
-            <div class="w-full lg:w-96 flex-shrink-0">
-                <div class="bg-white rounded-2xl border border-blue-100 shadow-xl shadow-blue-900/5 sticky top-24 overflow-hidden">
-                    <div class="p-6 border-b border-gray-50 bg-blue-50/50 flex items-center justify-between">
-                        <h3 class="font-bold text-blue-900">
-                            {{ $apakah_menambah ? 'Tambah Produk Baru' : 'Edit Produk' }}
-                        </h3>
-                        <button wire:click="batal" class="text-gray-400 hover:text-gray-600">
-                            <i class="fas fa-times"></i>
+            <div class="w-full xl:w-[450px] flex-shrink-0 animate-fade-in-right">
+                <div class="bg-[#0B1120]/80 backdrop-blur-3xl rounded-[3rem] border border-blue-500/30 shadow-2xl shadow-blue-900/20 sticky top-28 overflow-hidden">
+                    <div class="p-8 border-b border-white/5 bg-gradient-to-r from-blue-600/20 to-transparent flex items-center justify-between">
+                        <div>
+                            <h3 class="font-black text-white tracking-tight uppercase">
+                                {{ $apakah_menambah ? 'Data Input Protocol' : 'Update Resource Parameters' }}
+                            </h3>
+                            <p class="text-[9px] text-blue-400 font-bold tracking-[0.3em] mt-1">CORE COMMAND v4.0</p>
+                        </div>
+                        <button wire:click="batal" class="w-10 h-10 rounded-full hover:bg-white/5 text-gray-500 hover:text-white transition-all">
+                            <i class="fas fa-circle-xmark"></i>
                         </button>
                     </div>
                     
-                    <form wire:submit="simpan" class="p-6 space-y-5">
-                        <div>
-                            <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">Nama Produk</label>
-                            <input wire:model="nama" type="text" class="w-full bg-gray-50 border-none rounded-xl py-3 px-4 text-sm focus:ring-2 focus:ring-blue-500" placeholder="Contoh: Laptop Asus ROG">
-                            @error('nama') <span class="text-red-500 text-[10px] mt-1 font-bold">{{ $message }}</span> @enderror
-                        </div>
-
-                        <div>
-                            <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">Kategori</label>
-                            <select wire:model="kategori_id" class="w-full bg-gray-50 border-none rounded-xl py-3 px-4 text-sm focus:ring-2 focus:ring-blue-500">
-                                <option value="">Pilih Kategori</option>
-                                @foreach($daftar_kategori as $kat)
-                                    <option value="{{ $kat->id }}">{{ $kat->nama }}</option>
-                                @endforeach
-                            </select>
-                            @error('kategori_id') <span class="text-red-500 text-[10px] mt-1 font-bold">{{ $message }}</span> @enderror
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-4">
+                    <form wire:submit="simpan" class="p-10 space-y-8">
+                        <div class="space-y-6">
                             <div>
-                                <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">Harga (Rp)</label>
-                                <input wire:model="harga" type="number" class="w-full bg-gray-50 border-none rounded-xl py-3 px-4 text-sm focus:ring-2 focus:ring-blue-500">
-                                @error('harga') <span class="text-red-500 text-[10px] mt-1 font-bold">{{ $message }}</span> @enderror
+                                <label class="block text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] mb-3">Resource Identity</label>
+                                <input wire:model="nama" type="text" class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-sm text-white focus:ring-2 focus:ring-blue-500/50 outline-none" placeholder="Enter Product Name">
+                                @error('nama') <span class="text-red-500 text-[9px] font-black mt-2 block tracking-widest uppercase">{{ $message }}</span> @enderror
                             </div>
+
+                            <div class="grid grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] mb-3">Classification</label>
+                                    <select wire:model="kategori_id" class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-sm text-gray-400 focus:ring-2 focus:ring-blue-500/50 outline-none">
+                                        <option value="">Select Sector</option>
+                                        @foreach($daftar_kategori as $kat)
+                                            <option value="{{ $kat->id }}">{{ $kat->nama }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('kategori_id') <span class="text-red-500 text-[9px] font-black mt-2 block tracking-widest uppercase">{{ $message }}</span> @enderror
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] mb-3">Credits (IDR)</label>
+                                    <input wire:model="harga" type="number" class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-sm text-white focus:ring-2 focus:ring-blue-500/50 outline-none">
+                                    @error('harga') <span class="text-red-500 text-[9px] font-black mt-2 block tracking-widest uppercase">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
+
                             <div>
-                                <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">Stok Awal</label>
-                                <input wire:model="stok_awal" type="number" class="w-full bg-gray-50 border-none rounded-xl py-3 px-4 text-sm focus:ring-2 focus:ring-blue-500">
-                                @error('stok_awal') <span class="text-red-500 text-[10px] mt-1 font-bold">{{ $message }}</span> @enderror
+                                <label class="block text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] mb-3">Inventory Allocation</label>
+                                <div class="relative">
+                                    <input wire:model="stok_awal" type="number" class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-sm text-white focus:ring-2 focus:ring-blue-500/50 outline-none pl-14">
+                                    <i class="fas fa-warehouse absolute left-6 top-4.5 text-blue-500"></i>
+                                </div>
+                                @error('stok_awal') <span class="text-red-500 text-[9px] font-black mt-2 block tracking-widest uppercase">{{ $message }}</span> @enderror
+                            </div>
+
+                            <div>
+                                <label class="block text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] mb-3">Resource Specs</label>
+                                <textarea wire:model="deskripsi" rows="5" class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-sm text-gray-400 focus:ring-2 focus:ring-blue-500/50 outline-none" placeholder="Provide technical documentation for this resource..."></textarea>
+                                @error('deskripsi') <span class="text-red-500 text-[9px] font-black mt-2 block tracking-widest uppercase">{{ $message }}</span> @enderror
+                            </div>
+
+                            <div class="flex items-center gap-10 pt-4">
+                                <label class="flex items-center gap-3 cursor-pointer group">
+                                    <input type="checkbox" wire:model="apakah_aktif" class="w-5 h-5 rounded-lg border-white/10 bg-white/5 text-blue-600 focus:ring-blue-500/50">
+                                    <span class="text-[10px] font-black text-gray-500 group-hover:text-blue-400 uppercase tracking-widest">Active Node</span>
+                                </label>
+                                <label class="flex items-center gap-3 cursor-pointer group">
+                                    <input type="checkbox" wire:model="apakah_unggulan" class="w-5 h-5 rounded-lg border-white/10 bg-white/5 text-orange-600 focus:ring-orange-500/50">
+                                    <span class="text-[10px] font-black text-gray-500 group-hover:text-orange-400 uppercase tracking-widest">Priority Entity</span>
+                                </label>
                             </div>
                         </div>
 
-                        <div>
-                            <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">Deskripsi Produk</label>
-                            <textarea wire:model="deskripsi" rows="4" class="w-full bg-gray-50 border-none rounded-xl py-3 px-4 text-sm focus:ring-2 focus:ring-blue-500" placeholder="Jelaskan spesifikasi produk..."></textarea>
-                            @error('deskripsi') <span class="text-red-500 text-[10px] mt-1 font-bold">{{ $message }}</span> @enderror
-                        </div>
-
-                        <div class="flex items-center gap-6 pt-2">
-                            <label class="flex items-center gap-2 cursor-pointer group">
-                                <input type="checkbox" wire:model="apakah_aktif" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
-                                <span class="text-xs font-bold text-gray-500 group-hover:text-blue-600">Aktif</span>
-                            </label>
-                            <label class="flex items-center gap-2 cursor-pointer group">
-                                <input type="checkbox" wire:model="apakah_unggulan" class="rounded border-gray-300 text-orange-600 focus:ring-orange-500">
-                                <span class="text-xs font-bold text-gray-500 group-hover:text-orange-600">Unggulan</span>
-                            </label>
-                        </div>
-
-                        <div class="pt-4 flex gap-3">
-                            <button type="button" wire:click="batal" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-600 font-bold py-3 rounded-xl transition-all">
-                                BATAL
+                        <div class="pt-10 flex gap-4">
+                            <button type="button" wire:click="batal" class="flex-1 bg-white/5 hover:bg-white/10 text-gray-400 font-black py-4 rounded-[1.5rem] text-[10px] uppercase tracking-[0.2em] transition-all border border-white/5">
+                                Abort
                             </button>
-                            <button type="submit" class="flex-[2] bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl shadow-lg shadow-blue-200 transition-all">
-                                SIMPAN DATA
+                            <button type="submit" class="flex-[2] bg-blue-600 hover:bg-blue-700 text-white font-black py-4 rounded-[1.5rem] text-[10px] uppercase tracking-[0.2em] shadow-xl shadow-blue-900/20 transition-all transform hover:-translate-y-1 active:scale-95">
+                                Execute Operation
                             </button>
                         </div>
                     </form>
