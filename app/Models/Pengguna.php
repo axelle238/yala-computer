@@ -72,4 +72,20 @@ class Pengguna extends Authenticatable
     {
         return $this->kata_sandi;
     }
+
+    /**
+     * Dapatkan nama kolom password.
+     */
+    public function getAuthPasswordName()
+    {
+        return 'kata_sandi';
+    }
+
+    /**
+     * Dapatkan alamat surel untuk reset password.
+     */
+    public function getEmailForPasswordReset()
+    {
+        return $this->surel;
+    }
 }

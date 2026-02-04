@@ -121,7 +121,7 @@ class Indeks extends Component
             $this->catatAktivitas(
                 'tambah',
                 'Produk',
-                "Berhasil mendaftarkan produk baru: {$produk->nama}"
+                "Berhasil menambahkan produk baru: {$produk->nama}"
             );
         } else {
             $produk = Produk::findOrFail($this->id_produk_dipilih);
@@ -147,11 +147,11 @@ class Indeks extends Component
             $this->catatAktivitas(
                 'update',
                 'Produk',
-                "Memperbarui parameter teknis produk: {$produk->nama}"
+                "Memperbarui data teknis produk: {$produk->nama}"
             );
         }
 
-        $this->dispatch('notifikasi', pesan: 'Siklus data produk berhasil disinkronkan!', tipe: 'sukses');
+        $this->dispatch('notifikasi', pesan: 'Data produk berhasil disimpan!', tipe: 'sukses');
         $this->batal();
     }
 
@@ -209,8 +209,8 @@ class Indeks extends Component
         $nama = $produk->nama;
         $produk->delete();
 
-        $this->catatAktivitas('hapus', 'Produk', "Resource produk dimusnahkan dari sistem: {$nama}");
-        $this->dispatch('notifikasi', pesan: 'Data produk berhasil dimusnahkan!', tipe: 'info');
+        $this->catatAktivitas('hapus', 'Produk', "Data produk dihapus permanen dari sistem: {$nama}");
+        $this->dispatch('notifikasi', pesan: 'Data produk berhasil dihapus!', tipe: 'info');
     }
 
     /**

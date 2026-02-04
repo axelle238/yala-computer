@@ -27,7 +27,7 @@
     <div class="bg-[#0F172A] text-white py-2 overflow-hidden relative z-50">
         <div class="container mx-auto flex justify-between items-center text-xs font-medium relative">
             <div class="flex gap-6 items-center bg-[#0F172A] z-10 pr-6 pl-4 h-full absolute left-0 top-0 hidden md:flex">
-                <span class="text-blue-400 font-bold tracking-wider"><i class="fas fa-bolt mr-2"></i>FLASH SALE</span>
+                <span class="text-blue-400 font-bold tracking-wider"><i class="fas fa-bolt mr-2"></i>PENJUALAN KILAT</span>
             </div>
             
             <div class="flex-1 px-4 md:px-32">
@@ -56,7 +56,7 @@
                     </div>
                     <div class="flex flex-col">
                         <span class="font-['Outfit'] font-black text-xl leading-none text-slate-900 tracking-tight group-hover:text-blue-600 transition-colors">YALA<span class="text-blue-600">COMP</span></span>
-                        <span class="text-[9px] font-bold text-slate-400 tracking-[0.2em] uppercase">Tech Store</span>
+                        <span class="text-[9px] font-bold text-slate-400 tracking-[0.2em] uppercase">Toko Teknologi</span>
                     </div>
                 </a>
 
@@ -77,7 +77,7 @@
                         <div class="hidden md:flex items-center gap-3 pl-6 border-l border-slate-200">
                             <div class="text-right hidden lg:block">
                                 <p class="text-xs font-bold text-slate-900">{{ auth()->user()->nama }}</p>
-                                <p class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Member</p>
+                                <p class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Anggota</p>
                             </div>
                             <a href="{{ route('admin.dashboard') }}" class="w-10 h-10 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 font-black hover:bg-blue-600 hover:text-white transition-all shadow-sm">
                                 {{ substr(auth()->user()->nama, 0, 1) }}
@@ -144,7 +144,7 @@
                         <span class="font-['Outfit'] font-black text-2xl text-white tracking-tight">YALA<span class="text-blue-500">COMP</span></span>
                     </div>
                     <p class="text-sm leading-relaxed text-slate-400">
-                        Destinasi utama untuk para enthusiast teknologi. Kami menyediakan perangkat keras terbaik dengan jaminan kualitas dan layanan purna jual profesional.
+                        Destinasi utama untuk para penggemar teknologi. Kami menyediakan perangkat keras terbaik dengan jaminan kualitas dan layanan purna jual profesional.
                     </p>
                     <div class="flex gap-4 pt-2">
                         <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all"><i class="fab fa-facebook-f"></i></a>
@@ -157,10 +157,10 @@
                 <div>
                     <h4 class="font-bold text-white mb-6 uppercase tracking-widest text-xs">Eksplorasi</h4>
                     <ul class="space-y-4 text-sm">
-                        <li><a href="#" class="hover:text-blue-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-slate-600"></i> Laptop Gaming</a></li>
-                        <li><a href="#" class="hover:text-blue-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-slate-600"></i> Komponen PC</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-slate-600"></i> Laptop Performa</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-slate-600"></i> Komponen Komputer</a></li>
                         <li><a href="#" class="hover:text-blue-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-slate-600"></i> Aksesoris</a></li>
-                        <li><a href="#" class="hover:text-blue-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-slate-600"></i> Rakit PC</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-slate-600"></i> Rakit Komputer</a></li>
                     </ul>
                 </div>
 
@@ -196,7 +196,7 @@
             </div>
 
             <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-                <p class="text-xs text-slate-500 font-mono">© 2026 YALA COMPUTER. All Rights Reserved.</p>
+                <p class="text-xs text-slate-500 font-mono">© 2026 YALA COMPUTER. Hak Cipta Dilindungi.</p>
                 <div class="flex items-center gap-4 text-slate-500 text-2xl">
                     <i class="fab fa-cc-visa hover:text-white transition-colors"></i>
                     <i class="fab fa-cc-mastercard hover:text-white transition-colors"></i>

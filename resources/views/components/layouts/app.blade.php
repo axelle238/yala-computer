@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $title ?? 'Command Center' }} | YALACORE Enterprise</title>
+    <title>{{ $title ?? 'Pusat Komando' }} | YALACORE Korporat</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,11 +35,11 @@
                         <i class="fas fa-bars-staggered text-xl"></i>
                     </button>
                     <div class="flex flex-col">
-                        <h1 class="text-xl font-extrabold text-slate-900 tracking-tight leading-none">{{ $title ?? 'Dashboard' }}</h1>
+                        <h1 class="text-xl font-extrabold text-slate-900 tracking-tight leading-none">{{ $title ?? 'Dasbor' }}</h1>
                         <div class="flex items-center gap-2 text-[10px] text-slate-400 font-bold uppercase tracking-[0.2em] mt-1">
-                            <span class="text-blue-600">Enterprise</span>
+                            <span class="text-blue-600">Korporat</span>
                             <i class="fas fa-chevron-right text-[8px]"></i>
-                            <span>{{ request()->segment(2) ?? 'Home' }}</span>
+                            <span>{{ request()->segment(2) ?? 'Beranda' }}</span>
                         </div>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                     <div class="flex items-center gap-4 border-r border-slate-200 pr-8 hidden xl:flex">
                         <div class="flex flex-col items-end">
                             <span class="text-[10px] font-black text-emerald-600 tracking-widest flex items-center gap-2">
-                                <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span> NODE_ONLINE
+                                <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span> NODE_AKTIF
                             </span>
                             <span class="text-[9px] text-slate-400 font-mono">{{ now()->format('H:i:s') }}</span>
                         </div>

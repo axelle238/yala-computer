@@ -57,6 +57,6 @@ class Login extends Component
     public function render()
     {
         return view('livewire.admin.login')
-            ->layout('components.layouts.app', ['title' => 'Login Admin']);
+            ->layout('components.layouts.kosong', ['title' => 'Masuk Admin']);
     }
 }
