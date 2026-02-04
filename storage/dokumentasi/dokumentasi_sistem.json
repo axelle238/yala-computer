@@ -1,7 +1,7 @@
 {
     "nama_sistem": "Yala Computer",
     "versi_laravel": "12.49.0",
-    "terakhir_diperbarui": "2026-02-04 07:47:58",
+    "terakhir_diperbarui": "2026-02-04 08:16:14",
     "modul_aktif": [
         "Manajemen Produk",
         "Manajemen Kategori",
@@ -179,6 +179,21 @@
         },
         {
             "metode": "GET",
+            "uri": "lacak",
+            "nama": "lacak"
+        },
+        {
+            "metode": "GET",
+            "uri": "blog",
+            "nama": "artikel"
+        },
+        {
+            "metode": "GET",
+            "uri": "blog\/{slug}",
+            "nama": "artikel.detail"
+        },
+        {
+            "metode": "GET",
             "uri": "masuk",
             "nama": "login"
         },
@@ -199,8 +214,23 @@
         },
         {
             "metode": "GET",
+            "uri": "admin\/artikel",
+            "nama": "admin.artikel"
+        },
+        {
+            "metode": "GET",
             "uri": "admin\/pesanan",
             "nama": "admin.pesanan"
+        },
+        {
+            "metode": "GET",
+            "uri": "admin\/pelanggan",
+            "nama": "admin.pelanggan"
+        },
+        {
+            "metode": "GET",
+            "uri": "admin\/laporan",
+            "nama": "admin.laporan"
         },
         {
             "metode": "GET",
@@ -211,11 +241,6 @@
             "metode": "GET",
             "uri": "admin\/pengaturan",
             "nama": "admin.pengaturan"
-        },
-        {
-            "metode": "GET",
-            "uri": "admin\/pelanggan",
-            "nama": "admin.pelanggan"
         },
         {
             "metode": "GET",

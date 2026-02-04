@@ -51,6 +51,10 @@
                         <i class="fas fa-tags w-5"></i>
                         Kategori
                     </a>
+                    <a href="{{ route('admin.artikel') }}" wire:navigate class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl {{ request()->routeIs('admin.artikel*') ? 'bg-blue-50 text-blue-700' : 'text-gray-600 hover:bg-gray-50' }}">
+                        <i class="fas fa-newspaper w-5"></i>
+                        Artikel (Blog)
+                    </a>
                     <a href="{{ route('admin.pesanan') }}" wire:navigate class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl {{ request()->routeIs('admin.pesanan*') ? 'bg-blue-50 text-blue-700' : 'text-gray-600 hover:bg-gray-50' }}">
                         <i class="fas fa-shopping-cart w-5"></i>
                         Pesanan
@@ -60,6 +64,14 @@
                         Pelanggan
                     </a>
                     
+                    <div class="pt-4 pb-2 px-4">
+                        <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Analitik</span>
+                    </div>
+                    <a href="{{ route('admin.laporan') }}" wire:navigate class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl {{ request()->routeIs('admin.laporan*') ? 'bg-blue-50 text-blue-700' : 'text-gray-600 hover:bg-gray-50' }}">
+                        <i class="fas fa-chart-line w-5"></i>
+                        Laporan
+                    </a>
+
                     <div class="pt-4 pb-2 px-4">
                         <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Sistem</span>
                     </div>

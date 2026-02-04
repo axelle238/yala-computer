@@ -1,18 +1,24 @@
 <?php
 
+use App\Livewire\Admin\Artikel\Indeks as ArtikelIndeks;
 use App\Livewire\Admin\Dashboard;
 use App\Livewire\Admin\Kategori\Indeks as KategoriIndeks;
+use App\Livewire\Admin\Laporan\Indeks as LaporanIndeks;
 use App\Livewire\Admin\Log\Indeks as LogIndeks;
 use App\Livewire\Admin\Login;
 use App\Livewire\Admin\Pelanggan\Indeks as PelangganIndeks;
 use App\Livewire\Admin\Pengaturan\Indeks as PengaturanIndeks;
 use App\Livewire\Admin\Pesanan\Indeks as PesananIndeks;
 use App\Livewire\Admin\Produk\Indeks as ProdukIndeks;
+use App\Livewire\Publik\Artikel\Detail as PublikArtikelDetail;
+use App\Livewire\Publik\Artikel\Indeks as PublikArtikelIndeks;
 use App\Livewire\Publik\Beranda;
 use App\Livewire\Publik\Checkout\Indeks as CheckoutIndeks;
 use App\Livewire\Publik\Checkout\Sukses as CheckoutSukses;
+use App\Livewire\Publik\Halaman\Statis as HalamanStatis;
 use App\Livewire\Publik\Katalog\Indeks as KatalogIndeks;
 use App\Livewire\Publik\Keranjang\Indeks as KeranjangIndeks;
+use App\Livewire\Publik\Lacak\Indeks as LacakIndeks;
 use App\Livewire\Publik\Produk\Detail as ProdukDetail;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +31,10 @@ Route::get('/produk/{slug}', ProdukDetail::class)->name('produk.detail');
 Route::get('/keranjang', KeranjangIndeks::class)->name('keranjang');
 Route::get('/checkout', CheckoutIndeks::class)->name('checkout');
 Route::get('/terima-kasih', CheckoutSukses::class)->name('checkout.sukses');
+Route::get('/lacak', LacakIndeks::class)->name('lacak');
+Route::get('/blog', PublikArtikelIndeks::class)->name('artikel');
+Route::get('/blog/{slug}', PublikArtikelDetail::class)->name('artikel.detail');
+Route::get('/halaman/{slug}', HalamanStatis::class)->name('halaman');
 
 /**
  * Route: Administrasi (Protected)
@@ -35,8 +45,10 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('/dashboard', Dashboard::class)->name('dashboard');
     Route::get('/produk', ProdukIndeks::class)->name('produk');
     Route::get('/kategori', KategoriIndeks::class)->name('kategori');
+    Route::get('/artikel', ArtikelIndeks::class)->name('artikel');
     Route::get('/pesanan', PesananIndeks::class)->name('pesanan');
+    Route::get('/pelanggan', PelangganIndeks::class)->name('pelanggan');
+    Route::get('/laporan', LaporanIndeks::class)->name('laporan');
     Route::get('/log', LogIndeks::class)->name('log');
     Route::get('/pengaturan', PengaturanIndeks::class)->name('pengaturan');
-    Route::get('/pelanggan', PelangganIndeks::class)->name('pelanggan');
 });

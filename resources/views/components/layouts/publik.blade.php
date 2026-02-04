@@ -32,14 +32,21 @@
 
     <!-- Navigasi Utama -->
     <header class="bg-white border-b border-gray-100 sticky top-0 z-50">
-        <!-- Baris Atas (Info) -->
-        <div class="bg-blue-900 text-white py-2 px-4 hidden md:block">
-            <div class="container mx-auto flex justify-between items-center text-xs font-medium">
-                <div class="flex gap-4">
-                    <span><i class="fas fa-phone-alt mr-2"></i>+62 812-3456-7890</span>
-                    <span><i class="fas fa-envelope mr-2"></i>info@yalacomputer.com</span>
+        <!-- Baris Atas (Info & Running Text) -->
+        <div class="bg-blue-900 text-white py-2 px-4 hidden md:block overflow-hidden">
+            <div class="container mx-auto flex justify-between items-center text-xs font-medium relative">
+                <div class="flex gap-4 items-center bg-blue-900 z-10 pr-4">
+                    <span><i class="fas fa-phone-alt mr-2"></i>{{ \App\Models\Pengaturan::ambil('telepon_toko', '+62 812-3456-7890') }}</span>
+                    <span><i class="fas fa-envelope mr-2"></i>{{ \App\Models\Pengaturan::ambil('email_toko', 'info@yalacomputer.com') }}</span>
                 </div>
-                <div class="flex gap-4">
+                
+                <div class="flex-1 px-8">
+                    <div class="whitespace-nowrap animate-marquee">
+                        <span class="inline-block px-4"><i class="fas fa-bullhorn mr-2"></i>{{ \App\Models\Pengaturan::ambil('running_text', 'Selamat datang di Yala Computer - Solusi Kebutuhan IT Anda!') }}</span>
+                    </div>
+                </div>
+
+                <div class="flex gap-4 items-center bg-blue-900 z-10 pl-4">
                     <span>Buka: Senin - Sabtu (09:00 - 17:00)</span>
                 </div>
             </div>
@@ -95,6 +102,7 @@
                 <nav class="flex items-center gap-6 text-sm font-medium whitespace-nowrap">
                     <a href="{{ url('/') }}" wire:navigate class="py-3 border-b-2 {{ request()->is('/') ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-600 hover:text-blue-600' }}">Beranda</a>
                     <a href="{{ url('/katalog') }}" wire:navigate class="py-3 border-b-2 {{ request()->is('katalog') ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-600 hover:text-blue-600' }}">Semua Produk</a>
+                    <a href="{{ url('/blog') }}" wire:navigate class="py-3 border-b-2 {{ request()->is('blog*') ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-600 hover:text-blue-600' }}">Blog & Edukasi</a>
                     <a href="#" class="py-3 border-b-2 border-transparent text-gray-600 hover:text-blue-600">Laptop</a>
                     <a href="#" class="py-3 border-b-2 border-transparent text-gray-600 hover:text-blue-600">Rakitan PC</a>
                     <a href="#" class="py-3 border-b-2 border-transparent text-gray-600 hover:text-blue-600">Aksesoris</a>
@@ -137,9 +145,9 @@
                 <div>
                     <h3 class="font-bold text-gray-900 mb-6">Belanja</h3>
                     <ul class="space-y-3 text-sm text-gray-500">
-                        <li><a href="#" class="hover:text-blue-600">Semua Produk</a></li>
+                        <li><a href="{{ route('katalog') }}" wire:navigate class="hover:text-blue-600">Semua Produk</a></li>
+                        <li><a href="{{ route('lacak') }}" wire:navigate class="hover:text-blue-600">Lacak Pesanan</a></li>
                         <li><a href="#" class="hover:text-blue-600">Promo Hari Ini</a></li>
-                        <li><a href="#" class="hover:text-blue-600">Cek Status Pesanan</a></li>
                         <li><a href="#" class="hover:text-blue-600">Konfirmasi Pembayaran</a></li>
                     </ul>
                 </div>
@@ -148,11 +156,11 @@
                 <div>
                     <h3 class="font-bold text-gray-900 mb-6">Bantuan</h3>
                     <ul class="space-y-3 text-sm text-gray-500">
-                        <li><a href="#" class="hover:text-blue-600">Cara Pemesanan</a></li>
-                        <li><a href="#" class="hover:text-blue-600">Kebijakan Garansi</a></li>
-                        <li><a href="#" class="hover:text-blue-600">Pengembalian Barang</a></li>
-                        <li><a href="#" class="hover:text-blue-600">Hubungi Kami</a></li>
-                        <li><a href="#" class="hover:text-blue-600">FAQ</a></li>
+                        <li><a href="{{ route('halaman', 'cara-pemesanan') }}" wire:navigate class="hover:text-blue-600">Cara Pemesanan</a></li>
+                        <li><a href="{{ route('halaman', 'garansi') }}" wire:navigate class="hover:text-blue-600">Kebijakan Garansi</a></li>
+                        <li><a href="{{ route('halaman', 'tentang-kami') }}" wire:navigate class="hover:text-blue-600">Tentang Kami</a></li>
+                        <li><a href="{{ route('halaman', 'kontak') }}" wire:navigate class="hover:text-blue-600">Hubungi Kami</a></li>
+                        <li><a href="{{ route('halaman', 'faq') }}" wire:navigate class="hover:text-blue-600">FAQ</a></li>
                     </ul>
                 </div>
 
