@@ -23,10 +23,13 @@ class Indeks extends Component
 
     public $urutan = 'terbaru'; // terbaru, termurah, termahal, abjad
 
+    public $hanya_unggulan = false;
+
     protected $queryString = [
         'cari' => ['except' => ''],
         'kategori_terpilih' => ['except' => ''],
         'urutan' => ['except' => 'terbaru'],
+        'hanya_unggulan' => ['except' => false],
     ];
 
     /**
@@ -34,7 +37,7 @@ class Indeks extends Component
      */
     public function updated($property)
     {
-        if (in_array($property, ['cari', 'kategori_terpilih', 'urutan'])) {
+        if (in_array($property, ['cari', 'kategori_terpilih', 'urutan', 'hanya_unggulan'])) {
             $this->resetPage();
         }
     }
@@ -68,7 +71,8 @@ class Indeks extends Component
             })
             ->when($this->kategori_terpilih, function ($q) {
                 $q->whereHas('kategori', fn ($k) => $k->where('slug', $this->kategori_terpilih));
-            });
+            })
+            ->when($this->hanya_unggulan, fn ($q) => $q->where('apakah_unggulan', true));
 
         // Sorting
         $produk = match ($this->urutan) {
