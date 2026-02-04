@@ -1,7 +1,7 @@
 <div class="space-y-10">
     
     <!-- Analysis Control Center -->
-    <div class="flex flex-col lg:flex-row gap-6 items-center justify-between bg-[#0B1120]/50 backdrop-blur-xl p-8 rounded-[2.5rem] border border-white/5 shadow-2xl">
+    <div class="flex flex-col lg:flex-row gap-6 items-center justify-between bg-[#1E293B]/80 backdrop-blur-xl p-8 rounded-[2.5rem] border border-white/5 shadow-2xl">
         <div class="flex items-center gap-6 w-full lg:w-auto">
             <div class="w-16 h-16 bg-blue-600/10 rounded-[1.5rem] flex items-center justify-center text-blue-500 shadow-[inset_0_0_20px_rgba(37,99,235,0.1)]">
                 <i class="fas fa-chart-line text-2xl animate-bounce"></i>
@@ -17,7 +17,7 @@
 
         <div class="flex flex-wrap items-center gap-4 w-full lg:w-auto">
             <div class="relative group">
-                <select wire:model.live="periode" class="bg-[#0B1120] border border-white/10 rounded-2xl py-4 px-10 text-xs font-black text-blue-400 focus:ring-2 focus:ring-blue-500/50 outline-none cursor-pointer hover:bg-white/5 transition-all uppercase tracking-widest appearance-none">
+                <select wire:model.live="periode" class="bg-[#0F172A] border border-white/10 rounded-2xl py-4 px-10 text-xs font-black text-blue-400 focus:ring-2 focus:ring-blue-500/50 outline-none cursor-pointer hover:bg-white/5 transition-all uppercase tracking-widest appearance-none">
                     <option value="bulan_ini">Current Month Cycle</option>
                     <option value="bulan_lalu">Previous Cycle</option>
                     <option value="tahun_ini">Annual Projection</option>
@@ -52,10 +52,10 @@
         </div>
         
         <!-- Transaction Node Count -->
-        <div class="bg-[#0B1120]/50 backdrop-blur-xl p-10 rounded-[3rem] border border-white/5 shadow-2xl flex items-center justify-between group overflow-hidden relative">
+        <div class="bg-[#1E293B]/60 backdrop-blur-xl p-10 rounded-[3rem] border border-white/5 shadow-2xl flex items-center justify-between group overflow-hidden relative">
             <div class="absolute inset-0 bg-emerald-600/2 opacity-0 group-hover:opacity-100 transition-opacity"></div>
             <div class="relative z-10">
-                <p class="text-gray-500 text-xs font-black uppercase tracking-[0.3em] mb-3">Synchronized Transactions</p>
+                <p class="text-slate-500 text-xs font-black uppercase tracking-[0.3em] mb-3">Synchronized Transactions</p>
                 <div class="flex items-baseline gap-4">
                     <h3 class="text-6xl font-black text-white tracking-tighter font-mono">{{ number_format($total_transaksi) }}</h3>
                     <span class="text-emerald-500 font-black text-xs uppercase tracking-widest">Successful Nodes</span>
@@ -69,13 +69,13 @@
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
         <!-- Live Sales Matrix (Visual Bar) -->
-        <div class="lg:col-span-2 bg-[#0B1120]/50 backdrop-blur-xl p-10 rounded-[3rem] border border-white/5 shadow-2xl relative overflow-hidden">
+        <div class="lg:col-span-2 bg-[#1E293B]/60 backdrop-blur-xl p-10 rounded-[3rem] border border-white/5 shadow-2xl relative overflow-hidden">
             <div class="flex items-center justify-between mb-12">
                 <div class="flex items-center gap-4">
                     <div class="w-2 h-6 bg-blue-500 rounded-full"></div>
                     <h3 class="text-lg font-black text-white tracking-tight uppercase italic">Live Sales Matrix</h3>
                 </div>
-                <div class="flex items-center gap-2 text-gray-600 font-mono text-[9px]">
+                <div class="flex items-center gap-2 text-slate-500 font-mono text-[9px]">
                     <i class="fas fa-wave-square"></i> STREAMING DATA...
                 </div>
             </div>
@@ -99,11 +99,11 @@
                                 </div>
                                 <div class="absolute inset-0 bg-gradient-to-t from-blue-600/40 to-transparent"></div>
                             </div>
-                            <span class="text-[9px] font-mono text-gray-500 mt-4 font-bold uppercase tracking-widest">{{ \Carbon\Carbon::parse($data->tanggal)->format('d.M') }}</span>
+                            <span class="text-[9px] font-mono text-slate-500 mt-4 font-bold uppercase tracking-widest">{{ \Carbon\Carbon::parse($data->tanggal)->format('d.M') }}</span>
                         </div>
                     @endforeach
                 @else
-                    <div class="w-full h-full flex flex-col items-center justify-center text-gray-700 italic gap-4">
+                    <div class="w-full h-full flex flex-col items-center justify-center text-slate-500 italic gap-4">
                         <i class="fas fa-circle-nodes text-4xl animate-pulse"></i>
                         <p class="font-mono text-xs tracking-[0.2em] uppercase">No active transaction packets in current cycle.</p>
                     </div>
@@ -112,7 +112,7 @@
         </div>
 
         <!-- Top Performing Nodes -->
-        <div class="bg-[#0B1120]/50 backdrop-blur-xl p-10 rounded-[3rem] border border-white/5 shadow-2xl relative overflow-hidden">
+        <div class="bg-[#1E293B]/60 backdrop-blur-xl p-10 rounded-[3rem] border border-white/5 shadow-2xl relative overflow-hidden">
             <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-blue-600/5 rounded-full blur-3xl"></div>
             <h3 class="text-lg font-black text-white tracking-tight uppercase mb-10 italic flex items-center gap-4">
                 <i class="fas fa-trophy text-orange-500"></i> Top Nodes
@@ -120,22 +120,22 @@
             <div class="space-y-8 relative z-10">
                 @forelse($produk_terlaris as $index => $item)
                     <div class="flex items-center gap-6 group">
-                        <div class="w-12 h-12 flex items-center justify-center rounded-2xl bg-white/5 border border-white/10 text-gray-500 font-mono text-sm font-black group-hover:border-blue-500/50 group-hover:text-blue-400 transition-all">
+                        <div class="w-12 h-12 flex items-center justify-center rounded-2xl bg-white/5 border border-white/10 text-slate-500 font-mono text-sm font-black group-hover:border-blue-500/50 group-hover:text-blue-400 transition-all">
                             #0{{ $index + 1 }}
                         </div>
                         <div class="flex-1 min-w-0">
                             <p class="text-sm font-black text-white truncate group-hover:text-blue-400 transition-colors uppercase italic tracking-tighter">{{ $item->produk->nama ?? 'DELETED_RESOURCE' }}</p>
-                            <p class="text-[9px] font-black text-gray-600 uppercase tracking-widest mt-1">{{ $item->produk->kategori->nama ?? 'UNCLASSIFIED' }}</p>
+                            <p class="text-[9px] font-black text-slate-500 uppercase tracking-widest mt-1">{{ $item->produk->kategori->nama ?? 'UNCLASSIFIED' }}</p>
                         </div>
                         <div class="text-right">
                             <p class="text-lg font-black text-blue-500 font-mono tracking-tighter">{{ $item->total_jual }}</p>
-                            <p class="text-[8px] font-black text-gray-600 uppercase tracking-tighter">Units Dispatched</p>
+                            <p class="text-[8px] font-black text-slate-500 uppercase tracking-tighter">Units Dispatched</p>
                         </div>
                     </div>
                 @empty
                     <div class="text-center py-20">
                         <i class="fas fa-box-open text-white/5 text-5xl mb-4"></i>
-                        <p class="text-gray-600 font-mono italic text-xs uppercase">No resource performance data.</p>
+                        <p class="text-slate-500 font-mono italic text-xs uppercase">No resource performance data.</p>
                     </div>
                 @endforelse
             </div>
