@@ -45,6 +45,7 @@
             <div class="overflow-hidden transition-all duration-500 max-h-0 {{ $menuTerbuka === 'katalog' ? 'max-h-64 mb-2' : '' }}">
                 <div class="pl-14 space-y-1 pr-4">
                     <a href="{{ route('admin.produk') }}" wire:navigate class="block py-2.5 text-xs font-bold transition-colors {{ request()->routeIs('admin.produk*') ? 'text-purple-600' : 'text-slate-500 hover:text-purple-600' }}">Produk Katalog</a>
+                    <a href="{{ route('admin.stok') }}" wire:navigate class="block py-2.5 text-xs font-bold transition-colors {{ request()->routeIs('admin.stok*') ? 'text-purple-600' : 'text-slate-500 hover:text-purple-600' }}">Manajemen Stok</a>
                     <a href="{{ route('admin.kategori') }}" wire:navigate class="block py-2.5 text-xs font-bold transition-colors {{ request()->routeIs('admin.kategori*') ? 'text-purple-600' : 'text-slate-500 hover:text-purple-600' }}">Sektor Kategori</a>
                 </div>
             </div>

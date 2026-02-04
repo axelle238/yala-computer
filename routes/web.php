@@ -11,6 +11,7 @@ use App\Livewire\Admin\Pengaturan\Indeks as PengaturanIndeks;
 use App\Livewire\Admin\Pengguna\Indeks as AdministratorIndeks;
 use App\Livewire\Admin\Pesanan\Indeks as PesananIndeks;
 use App\Livewire\Admin\Produk\Indeks as ProdukIndeks;
+use App\Livewire\Admin\Stok\Indeks as StokIndeks;
 use App\Livewire\Publik\Artikel\Detail as PublikArtikelDetail;
 use App\Livewire\Publik\Artikel\Indeks as PublikArtikelIndeks;
 use App\Livewire\Publik\Beranda;
@@ -46,6 +47,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('/dashboard', Dashboard::class)->name('dashboard');
     Route::get('/produk', ProdukIndeks::class)->name('produk');
     Route::get('/kategori', KategoriIndeks::class)->name('kategori');
+    Route::get('/stok', StokIndeks::class)->name('stok');
     Route::get('/artikel', ArtikelIndeks::class)->name('artikel');
     Route::get('/pesanan', PesananIndeks::class)->name('pesanan');
     Route::get('/pelanggan', PelangganIndeks::class)->name('pelanggan');
