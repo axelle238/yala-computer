@@ -2,46 +2,35 @@
 
 ## Informasi Umum
 - **Tanggal Analisis**: 4 Februari 2026
-- **Status Project**: Dalam Pengembangan (Early Stage)
+- **Status Project**: Dalam Pengembangan (Fondasi Selesai)
 - **Framework**: Laravel 12 (Bleeding Edge / Custom)
 - **Frontend**: Livewire 4 + Tailwind v4
-- **Bahasa**: Wajib 100% Bahasa Indonesia
+- **Bahasa**: 100% Bahasa Indonesia (Strict Compliance)
 
 ## Analisis Database & Migrasi
-Saat ini migrasi sudah menggunakan Bahasa Indonesia, namun ditemukan beberapa inkonsistensi pada tabel sistem inti yang perlu diperbaiki agar patuh pada aturan "100% Bahasa Indonesia":
-
-1.  **Tabel `token_reset_kata_sandi`**:
-    -   Kolom `email` masih menggunakan Bahasa Inggris.
-    -   **Tindakan**: Ubah menjadi `surel`.
-
-2.  **Tabel `sesi`**:
-    -   Kolom `user_id` masih menggunakan Bahasa Inggris.
-    -   **Tindakan**: Ubah menjadi `pengguna_id`.
-
-3.  **Tabel Internal Laravel (`pekerjaan`, `tembolok`)**:
-    -   Masih menggunakan nama kolom standar (`queue`, `payload`, dll).
-    -   **Keputusan**: Tetap pertahankan nama kolom internal Laravel untuk `pekerjaan`, `pekerjaan_gagal`, dan `tembolok` demi menjaga kompatibilitas Driver Laravel tanpa merusak core framework, namun beri komentar penjelasan.
+- [x] Migrasi Sistem Inti: Kolom `surel` dan `pengguna_id` telah disesuaikan.
+- [x] Model Pengguna: `getAuthPasswordName` dan `getEmailForPasswordReset` telah di-override.
+- [x] Tabel Bisnis: Nama tabel dan kolom sudah dalam Bahasa Indonesia.
 
 ## Analisis Arsitektur Code
-1.  **Model**: Sudah ada file model (e.g., `Pengguna.php`, `Produk.php`). Perlu dicek apakah properti `$fillable`, `$casts`, dan relasi sudah menggunakan nama fungsi Bahasa Indonesia.
-2.  **Auth**: Laravel default mencari `email` dan `password`.
-    -   **Tindakan**: Override `getAuthPasswordName()` dan `username()` di model `Pengguna`.
-    -   **Tindakan**: Sesuaikan `config/auth.php`.
-3.  **Livewire**: Folder `app/Livewire` sudah terstruktur rapi (Admin vs Publik).
-    -   **Validasi**: Pastikan tidak ada `wire:ignore` yang membungkus modal. Semua harus inline/page-based.
+- [x] Auth Provider: Dikonfigurasi ulang ke `App\Models\Pengguna` dengan driver `eloquent`.
+- [x] Factory & Seeder: `PenggunaFactory` dibuat, `UserFactory` dihapus.
+- [x] Layout: `app`, `publik`, dan `kosong` (login) sudah diterjemahkan sepenuhnya.
+- [x] Modul Produk: CRUD dasar tanpa modal sudah terlokalisasi.
 
-## Rencana Perbaikan (Immediate Action)
-1.  **Refactor Migrasi Sistem Inti**: Perbaiki kolom `surel` dan `pengguna_id`.
-2.  **Refactor Model Pengguna**: Pastikan kompatibel dengan Auth Laravel.
-3.  **Dokumentasi Hidup**: Buat file `storage/dokumentasi/dokumentasi_sistem.json` awal.
-4.  **Implementasi Fitur**: Mulai dari manajemen stok/produk real-time.
+## Rencana Pengembangan (Tahap 2: Manajemen Bisnis Inti)
+1.  **Manajemen Kategori**: Implementasi CRUD Kategori (Inline).
+2.  **Manajemen Stok**: Implementasi mutasi stok (masuk/keluar).
+3.  **Frontend Katalog**: Menampilkan produk di halaman publik dengan filter.
+4.  **Keranjang Belanja**: Logika sesi keranjang belanja Livewire.
 
 ## Status Kepatuhan
--   [x] Nama File Migrasi (Indonesian)
--   [ ] Nama Kolom Database (Partial - perlu fix `email` -> `surel`)
--   [x] Struktur Folder Livewire
--   [ ] Dokumentasi Otomatis (Belum ada)
--   [ ] No Modals (Perlu verifikasi kode view)
+- [x] Nama File Migrasi (Indonesian)
+- [x] Nama Kolom Database (Indonesian)
+- [x] Struktur Folder Livewire
+- [x] Dokumentasi Otomatis (JSON)
+- [x] No Modals (Verified)
+- [x] UI Text (100% Indonesian)
 
 ---
 *Laporan ini diperbarui secara otomatis.*
