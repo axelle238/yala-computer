@@ -8,7 +8,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
 
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -16,50 +16,51 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>
-<body class="font-['Plus_Jakarta_Sans'] bg-[#0F172A] text-slate-300 antialiased overflow-hidden selection:bg-blue-500 selection:text-white">
+<body class="font-['Plus_Jakarta_Sans'] bg-[#F1F5F9] text-slate-900 antialiased overflow-hidden selection:bg-blue-600 selection:text-white">
 
     <div class="flex h-screen overflow-hidden">
-        <!-- Reaktif Sidebar -->
+        <!-- Reaktif Sidebar (Light Version) -->
         <livewire:admin.komponen.sidebar />
 
         <!-- Main Workspace -->
-        <main class="flex-1 flex flex-col min-w-0 bg-[#0F172A] relative overflow-hidden">
-            <!-- Ambient Background Effects (Softened) -->
-            <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-blue-600/5 rounded-full blur-[150px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
-            <div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-indigo-600/5 rounded-full blur-[150px] translate-y-1/2 -translate-x-1/2 pointer-events-none"></div>
+        <main class="flex-1 flex flex-col min-w-0 bg-[#F1F5F9] relative overflow-hidden">
+            <!-- Glassmorphism Background Decoration -->
+            <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-400/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+            <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-purple-400/10 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2 pointer-events-none"></div>
 
-            <!-- Dashboard Header -->
-            <header class="h-20 bg-[#1E293B]/80 backdrop-blur-2xl border-b border-white/5 flex items-center justify-between px-10 sticky top-0 z-40 shadow-sm">
+            <!-- Dashboard Header (Modern Light) -->
+            <header class="h-20 bg-white/70 backdrop-blur-xl border-b border-slate-200/60 flex items-center justify-between px-10 sticky top-0 z-40">
                 <div class="flex items-center gap-6">
-                    <button class="lg:hidden text-slate-400 hover:text-white transition-colors">
+                    <button class="lg:hidden text-slate-600">
                         <i class="fas fa-bars-staggered text-xl"></i>
                     </button>
                     <div class="flex flex-col">
-                        <h1 class="text-xl font-black text-white tracking-tight">{{ $title ?? 'Dashboard' }}</h1>
-                        <div class="flex items-center gap-2 text-[10px] text-slate-500 font-bold uppercase tracking-[0.2em]">
-                            <span>YALACORE</span>
+                        <h1 class="text-xl font-extrabold text-slate-900 tracking-tight leading-none">{{ $title ?? 'Dashboard' }}</h1>
+                        <div class="flex items-center gap-2 text-[10px] text-slate-400 font-bold uppercase tracking-[0.2em] mt-1">
+                            <span class="text-blue-600">Enterprise</span>
                             <i class="fas fa-chevron-right text-[8px]"></i>
-                            <span class="text-blue-400">{{ request()->segment(2) ?? 'Home' }}</span>
+                            <span>{{ request()->segment(2) ?? 'Home' }}</span>
                         </div>
                     </div>
                 </div>
                 
                 <div class="flex items-center gap-8">
-                    <!-- System Status Indicators -->
-                    <div class="flex items-center gap-4 border-l border-white/10 pl-8">
+                    <!-- Live System Monitor -->
+                    <div class="flex items-center gap-4 border-r border-slate-200 pr-8 hidden xl:flex">
                         <div class="flex flex-col items-end">
-                            <span class="text-[10px] font-black text-emerald-400 tracking-widest flex items-center gap-2">
-                                <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></span> SYSTEM ONLINE
+                            <span class="text-[10px] font-black text-emerald-600 tracking-widest flex items-center gap-2">
+                                <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span> NODE_ONLINE
                             </span>
-                            <span class="text-[9px] text-slate-500 font-mono">{{ now()->format('H:i:s') }} UTC</span>
+                            <span class="text-[9px] text-slate-400 font-mono">{{ now()->format('H:i:s') }}</span>
                         </div>
-                        <livewire:admin.komponen.notification-hub />
                     </div>
+                    
+                    <livewire:admin.komponen.notification-hub />
                 </div>
             </header>
 
-            <!-- Scrollable Workspace Content -->
-            <div class="flex-1 overflow-y-auto p-10 custom-scrollbar relative z-10">
+            <!-- Scrollable Content -->
+            <div class="flex-1 overflow-y-auto p-8 custom-scrollbar relative z-10">
                 <div class="max-w-[1600px] mx-auto">
                     {{ $slot }}
                 </div>
@@ -67,9 +68,7 @@
         </main>
     </div>
 
-    <!-- Global Notification System (Toast) -->
     <livewire:komponen.notifikasi />
-
     @livewireScripts
 </body>
 </html>
