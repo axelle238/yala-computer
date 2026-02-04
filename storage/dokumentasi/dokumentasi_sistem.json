@@ -1,0 +1,227 @@
+{
+    "nama_sistem": "Yala Computer",
+    "versi_laravel": "12.49.0",
+    "terakhir_diperbarui": "2026-02-04 07:47:58",
+    "modul_aktif": [
+        "Manajemen Produk",
+        "Manajemen Kategori",
+        "Manajemen Stok",
+        "Manajemen Pesanan",
+        "Manajemen Pelanggan",
+        "Log Aktivitas Naratif",
+        "SEO Teknis"
+    ],
+    "database": {
+        "pengguna": [
+            "id",
+            "nama",
+            "surel",
+            "surel_diverifikasi_pada",
+            "kata_sandi",
+            "remember_token",
+            "created_at",
+            "updated_at"
+        ],
+        "kategori": [
+            "id",
+            "nama",
+            "slug",
+            "deskripsi",
+            "ikon",
+            "created_at",
+            "updated_at"
+        ],
+        "produk": [
+            "id",
+            "kategori_id",
+            "nama",
+            "slug",
+            "deskripsi",
+            "harga",
+            "gambar_utama",
+            "galeri_gambar",
+            "apakah_aktif",
+            "apakah_unggulan",
+            "meta_judul",
+            "meta_deskripsi",
+            "created_at",
+            "updated_at"
+        ],
+        "stok": [
+            "id",
+            "produk_id",
+            "jumlah",
+            "catatan",
+            "created_at",
+            "updated_at"
+        ],
+        "pelanggan": [
+            "id",
+            "nama",
+            "surel",
+            "telepon",
+            "alamat",
+            "kata_sandi",
+            "created_at",
+            "updated_at"
+        ],
+        "pesanan": [
+            "id",
+            "nomor_invoice",
+            "pelanggan_id",
+            "total_harga",
+            "status_pembayaran",
+            "status_pesanan",
+            "catatan_pembeli",
+            "created_at",
+            "updated_at"
+        ],
+        "pesanan_item": [
+            "id",
+            "pesanan_id",
+            "produk_id",
+            "kuantitas",
+            "harga_satuan",
+            "subtotal",
+            "created_at",
+            "updated_at"
+        ],
+        "log_aktivitas": [
+            "id",
+            "pengguna_id",
+            "aksi",
+            "target",
+            "pesan_naratif",
+            "meta_json",
+            "waktu"
+        ]
+    },
+    "endpoint": [
+        {
+            "metode": "POST",
+            "uri": "livewire-b7af0df6\/update",
+            "nama": "default.livewire.update"
+        },
+        {
+            "metode": "GET",
+            "uri": "livewire-b7af0df6\/livewire.js",
+            "nama": null
+        },
+        {
+            "metode": "GET",
+            "uri": "livewire-b7af0df6\/livewire.min.js.map",
+            "nama": null
+        },
+        {
+            "metode": "GET",
+            "uri": "livewire-b7af0df6\/livewire.csp.min.js.map",
+            "nama": null
+        },
+        {
+            "metode": "POST",
+            "uri": "livewire-b7af0df6\/upload-file",
+            "nama": "livewire.upload-file"
+        },
+        {
+            "metode": "GET",
+            "uri": "livewire-b7af0df6\/preview-file\/{filename}",
+            "nama": "livewire.preview-file"
+        },
+        {
+            "metode": "GET",
+            "uri": "livewire-b7af0df6\/js\/{component}.js",
+            "nama": null
+        },
+        {
+            "metode": "GET",
+            "uri": "livewire-b7af0df6\/css\/{component}.css",
+            "nama": null
+        },
+        {
+            "metode": "GET",
+            "uri": "livewire-b7af0df6\/css\/{component}.global.css",
+            "nama": null
+        },
+        {
+            "metode": "GET",
+            "uri": "up",
+            "nama": null
+        },
+        {
+            "metode": "GET",
+            "uri": "\/",
+            "nama": "beranda"
+        },
+        {
+            "metode": "GET",
+            "uri": "katalog",
+            "nama": "katalog"
+        },
+        {
+            "metode": "GET",
+            "uri": "produk\/{slug}",
+            "nama": "produk.detail"
+        },
+        {
+            "metode": "GET",
+            "uri": "keranjang",
+            "nama": "keranjang"
+        },
+        {
+            "metode": "GET",
+            "uri": "checkout",
+            "nama": "checkout"
+        },
+        {
+            "metode": "GET",
+            "uri": "terima-kasih",
+            "nama": "checkout.sukses"
+        },
+        {
+            "metode": "GET",
+            "uri": "masuk",
+            "nama": "login"
+        },
+        {
+            "metode": "GET",
+            "uri": "admin\/dashboard",
+            "nama": "admin.dashboard"
+        },
+        {
+            "metode": "GET",
+            "uri": "admin\/produk",
+            "nama": "admin.produk"
+        },
+        {
+            "metode": "GET",
+            "uri": "admin\/kategori",
+            "nama": "admin.kategori"
+        },
+        {
+            "metode": "GET",
+            "uri": "admin\/pesanan",
+            "nama": "admin.pesanan"
+        },
+        {
+            "metode": "GET",
+            "uri": "admin\/log",
+            "nama": "admin.log"
+        },
+        {
+            "metode": "GET",
+            "uri": "admin\/pengaturan",
+            "nama": "admin.pengaturan"
+        },
+        {
+            "metode": "GET",
+            "uri": "admin\/pelanggan",
+            "nama": "admin.pelanggan"
+        },
+        {
+            "metode": "GET",
+            "uri": "storage\/{path}",
+            "nama": "storage.local"
+        }
+    ],
+    "status_sistem": "Aktif & Stabil"
+}
