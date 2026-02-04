@@ -86,6 +86,7 @@
             <div class="overflow-hidden transition-all duration-500 max-h-0 {{ $menuTerbuka === 'crm' ? 'max-h-64 mt-2' : '' }}">
                 <div class="pl-14 space-y-1">
                     <a href="{{ route('admin.pelanggan') }}" wire:navigate class="block py-2.5 text-sm font-medium hover:text-blue-400 transition-colors {{ request()->routeIs('admin.pelanggan*') ? 'text-blue-500 font-bold' : '' }}">Database Pelanggan</a>
+                    <a href="{{ route('admin.administrator') }}" wire:navigate class="block py-2.5 text-sm font-medium hover:text-blue-400 transition-colors {{ request()->routeIs('admin.administrator*') ? 'text-blue-500 font-bold' : '' }}">Node Otoritas</a>
                     <a href="#" class="block py-2.5 text-sm font-medium hover:text-blue-400 transition-colors opacity-50">Ulasan & Feedback</a>
                 </div>
             </div>

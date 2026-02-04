@@ -1,7 +1,7 @@
 {
     "nama_sistem": "Yala Computer",
     "versi_laravel": "12.49.0",
-    "terakhir_diperbarui": "2026-02-04 08:16:14",
+    "terakhir_diperbarui": "2026-02-04 08:43:56",
     "modul_aktif": [
         "Manajemen Produk",
         "Manajemen Kategori",
@@ -194,6 +194,11 @@
         },
         {
             "metode": "GET",
+            "uri": "halaman\/{slug}",
+            "nama": "halaman"
+        },
+        {
+            "metode": "GET",
             "uri": "masuk",
             "nama": "login"
         },
@@ -226,6 +231,11 @@
             "metode": "GET",
             "uri": "admin\/pelanggan",
             "nama": "admin.pelanggan"
+        },
+        {
+            "metode": "GET",
+            "uri": "admin\/administrator",
+            "nama": "admin.administrator"
         },
         {
             "metode": "GET",

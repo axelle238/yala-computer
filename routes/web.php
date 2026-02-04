@@ -8,6 +8,7 @@ use App\Livewire\Admin\Log\Indeks as LogIndeks;
 use App\Livewire\Admin\Login;
 use App\Livewire\Admin\Pelanggan\Indeks as PelangganIndeks;
 use App\Livewire\Admin\Pengaturan\Indeks as PengaturanIndeks;
+use App\Livewire\Admin\Pengguna\Indeks as AdministratorIndeks;
 use App\Livewire\Admin\Pesanan\Indeks as PesananIndeks;
 use App\Livewire\Admin\Produk\Indeks as ProdukIndeks;
 use App\Livewire\Publik\Artikel\Detail as PublikArtikelDetail;
@@ -48,6 +49,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('/artikel', ArtikelIndeks::class)->name('artikel');
     Route::get('/pesanan', PesananIndeks::class)->name('pesanan');
     Route::get('/pelanggan', PelangganIndeks::class)->name('pelanggan');
+    Route::get('/administrator', AdministratorIndeks::class)->name('administrator');
     Route::get('/laporan', LaporanIndeks::class)->name('laporan');
     Route::get('/log', LogIndeks::class)->name('log');
     Route::get('/pengaturan', PengaturanIndeks::class)->name('pengaturan');
