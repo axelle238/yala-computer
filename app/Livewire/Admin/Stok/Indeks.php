@@ -64,7 +64,7 @@ class Indeks extends Component
             $jumlah_akhir = $jumlah_awal + $perubahan;
 
             if ($jumlah_akhir < 0) {
-                throw new \Exception('Stok tidak mencukupi untuk pengurangan ini.');
+                throw new \Exception('Saldo stok defisit! Pengurangan dibatalkan.');
             }
 
             // 1. Update Tabel Stok
@@ -78,19 +78,19 @@ class Indeks extends Component
                 'perubahan' => $perubahan,
                 'jumlah_akhir' => $jumlah_akhir,
                 'jenis' => $this->jenis_aksi,
-                'keterangan' => $this->keterangan ?: "Penyesuaian stok {$this->jenis_aksi} secara manual.",
+                'keterangan' => $this->keterangan ?: "Intervensi stok manual: {$this->jenis_aksi}.",
             ]);
 
             // 3. Catat Log Sistem
             $this->catatAktivitas(
                 'update',
                 'Stok',
-                "Mutasi stok {$this->jenis_aksi}: {$this->produk_dipilih->nama} ({$perubahan} unit). Stok akhir: {$jumlah_akhir}"
+                "Mutasi stok {$this->jenis_aksi} terdeteksi: {$this->produk_dipilih->nama} ({$perubahan} unit). Stok akhir: {$jumlah_akhir}"
             );
 
             DB::commit();
 
-            $this->dispatch('notifikasi', pesan: 'Mutasi stok berhasil disinkronkan!', tipe: 'sukses');
+            $this->dispatch('notifikasi', pesan: 'Proses mutasi berhasil disinkronisasi ke buku besar.', tipe: 'sukses');
             $this->resetForm();
 
         } catch (\Exception $e) {

@@ -2,7 +2,7 @@
   "meta": {
     "proyek": "Yala Computer",
     "deskripsi": "Sistem Toko Komputer Enterprise Berbasis Laravel 12 & Livewire 4",
-    "versi": "1.0.0-dev",
+    "versi": "1.1.0-dev",
     "terakhir_diperbarui": "2026-02-04",
     "bahasa": "100% Indonesia"
   },
@@ -24,6 +24,7 @@
     "admin": [
       { "nama": "Dashboard", "status": "Siap", "url": "/admin/dashboard" },
       { "nama": "Manajemen Produk", "status": "Siap", "url": "/admin/produk" },
+      { "nama": "Manajemen Kategori", "status": "Siap", "url": "/admin/kategori" },
       { "nama": "Manajemen Stok", "status": "Siap", "url": "/admin/stok" },
       { "nama": "Manajemen Pesanan", "status": "Siap", "url": "/admin/pesanan" },
       { "nama": "Log Aktivitas", "status": "Siap", "url": "/admin/log" }

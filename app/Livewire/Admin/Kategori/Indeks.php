@@ -91,8 +91,8 @@ class Indeks extends Component
                 'ikon' => $this->ikon ?: 'fas fa-box',
             ]);
 
-            $this->catatAktivitas('tambah', 'Kategori', "Menambahkan kategori baru: {$kategori->nama}");
-            $this->dispatch('notifikasi', pesan: 'Kategori berhasil ditambahkan!', tipe: 'sukses');
+            $this->catatAktivitas('tambah', 'Kategori', "Menginisialisasi node sektor baru: {$kategori->nama}");
+            $this->dispatch('notifikasi', pesan: 'Node sektor berhasil diaktifkan dalam jaringan!', tipe: 'sukses');
         } else {
             $kategori = Kategori::findOrFail($this->id_kategori_diedit);
             $namaLama = $kategori->nama;
@@ -104,8 +104,8 @@ class Indeks extends Component
                 'ikon' => $this->ikon,
             ]);
 
-            $this->catatAktivitas('update', 'Kategori', "Memperbarui kategori dari {$namaLama} menjadi {$kategori->nama}");
-            $this->dispatch('notifikasi', pesan: 'Kategori berhasil diperbarui!', tipe: 'sukses');
+            $this->catatAktivitas('update', 'Kategori', "Rekonfigurasi parameter sektor dari {$namaLama} menjadi {$kategori->nama}");
+            $this->dispatch('notifikasi', pesan: 'Sinkronisasi ulang data sektor berhasil!', tipe: 'sukses');
         }
 
         $this->resetForm();
@@ -120,7 +120,7 @@ class Indeks extends Component
 
         // Cek relasi produk
         if ($kategori->produk()->exists()) {
-            $this->dispatch('notifikasi', pesan: 'Gagal menghapus! Kategori ini masih memiliki produk terkait.', tipe: 'bahaya');
+            $this->dispatch('notifikasi', pesan: 'Protokol Ditolak! Sektor masih menampung aset aktif.', tipe: 'bahaya');
 
             return;
         }
@@ -128,8 +128,8 @@ class Indeks extends Component
         $nama = $kategori->nama;
         $kategori->delete();
 
-        $this->catatAktivitas('hapus', 'Kategori', "Menghapus kategori: {$nama}");
-        $this->dispatch('notifikasi', pesan: 'Kategori berhasil dihapus!', tipe: 'sukses');
+        $this->catatAktivitas('hapus', 'Kategori', "Terminasi permanen node sektor: {$nama}");
+        $this->dispatch('notifikasi', pesan: 'Node sektor berhasil dihapus dari grid sistem!', tipe: 'sukses');
         $this->resetForm();
     }
 
